@@ -1,0 +1,148 @@
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Mesh Deformation Code)                     |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Input mesh file name: mesh_NACA0012_inv.su2
+
+---------------------- Grid deformation parameters ----------------------
+Grid deformation using a linear elasticity method.
+Design variables definition (markers <-> value <-> param):
+Hicks Henne <-> airfoil <-> 0.00037533 <-> ( 0, 0.05 )
+Hicks Henne <-> airfoil <-> -4.34394e-05 <-> ( 0, 0.1 )
+Hicks Henne <-> airfoil <-> -0.000313294 <-> ( 0, 0.15 )
+Hicks Henne <-> airfoil <-> -0.00047496 <-> ( 0, 0.2 )
+Hicks Henne <-> airfoil <-> -0.000530014 <-> ( 0, 0.25 )
+Hicks Henne <-> airfoil <-> -0.000466927 <-> ( 0, 0.3 )
+Hicks Henne <-> airfoil <-> -0.000279913 <-> ( 0, 0.35 )
+Hicks Henne <-> airfoil <-> 1.58322e-05 <-> ( 0, 0.4 )
+Hicks Henne <-> airfoil <-> 0.000375622 <-> ( 0, 0.45 )
+Hicks Henne <-> airfoil <-> 0.000729232 <-> ( 0, 0.5 )
+Hicks Henne <-> airfoil <-> 0.00100147 <-> ( 0, 0.55 )
+Hicks Henne <-> airfoil <-> 0.00114576 <-> ( 0, 0.6 )
+Hicks Henne <-> airfoil <-> 0.00117425 <-> ( 0, 0.65 )
+Hicks Henne <-> airfoil <-> 0.0011585 <-> ( 0, 0.7 )
+Hicks Henne <-> airfoil <-> 0.00118687 <-> ( 0, 0.75 )
+Hicks Henne <-> airfoil <-> 0.00130848 <-> ( 0, 0.8 )
+Hicks Henne <-> airfoil <-> 0.00153238 <-> ( 0, 0.85 )
+Hicks Henne <-> airfoil <-> 0.00190423 <-> ( 0, 0.9 )
+Hicks Henne <-> airfoil <-> 0.00263119 <-> ( 0, 0.95 )
+Hicks Henne <-> airfoil <-> -0.00257022 <-> ( 1, 0.05 )
+Hicks Henne <-> airfoil <-> -0.00346894 <-> ( 1, 0.1 )
+Hicks Henne <-> airfoil <-> -0.00351704 <-> ( 1, 0.15 )
+Hicks Henne <-> airfoil <-> -0.00317622 <-> ( 1, 0.2 )
+Hicks Henne <-> airfoil <-> -0.0026317 <-> ( 1, 0.25 )
+Hicks Henne <-> airfoil <-> -0.00199077 <-> ( 1, 0.3 )
+Hicks Henne <-> airfoil <-> -0.00133464 <-> ( 1, 0.35 )
+Hicks Henne <-> airfoil <-> -0.000729447 <-> ( 1, 0.4 )
+Hicks Henne <-> airfoil <-> -0.000225183 <-> ( 1, 0.45 )
+Hicks Henne <-> airfoil <-> 0.000146964 <-> ( 1, 0.5 )
+Hicks Henne <-> airfoil <-> 0.000373815 <-> ( 1, 0.55 )
+Hicks Henne <-> airfoil <-> 0.000453876 <-> ( 1, 0.6 )
+Hicks Henne <-> airfoil <-> 0.000386656 <-> ( 1, 0.65 )
+Hicks Henne <-> airfoil <-> 0.000164975 <-> ( 1, 0.7 )
+Hicks Henne <-> airfoil <-> -0.000212864 <-> ( 1, 0.75 )
+Hicks Henne <-> airfoil <-> -0.000696829 <-> ( 1, 0.8 )
+Hicks Henne <-> airfoil <-> -0.00115808 <-> ( 1, 0.85 )
+Hicks Henne <-> airfoil <-> -0.00154205 <-> ( 1, 0.9 )
+Hicks Henne <-> airfoil <-> -0.0021366 <-> ( 1, 0.95 )
+
+-------------------------- Output Information ---------------------------
+Output mesh file name: mesh_NACA0012_inv_deform.su2. 
+No file for visualizing the deformation.
+Cell stiffness scaled by inverse of the cell volume.
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points before parallel partitioning.
+Performing linear partitioning of the grid nodes.
+10216 interior elements before parallel partitioning.
+Calling the partitioning functions.
+Building the graph adjacency structure.
+Distributing elements across all ranks.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+Calling ParMETIS...
+Finished partitioning using ParMETIS (547 edge cuts).
+Communicating partition data and creating halo layers.
+10763 interior elements including halo cells. 
+10763 triangles.
+5796 vertices including ghost points. 
+Establishing MPI communication patterns.
+
+----------------------- Preprocessing computations ----------------------
+Setting local point connectivity.
+Checking the numerical grid orientation.
+Identify edges and vertices.
+Computing centers of gravity.
+Setting the bound control volume structure.
+
+------------------------- Surface grid deformation ----------------------
+Performing the deformation of the surface grid.
+
+----------------------- Volumetric grid deformation ---------------------
+Performing the deformation of the volumetric grid.
+Computing volumes of the grid elements.
+Min. volume: 4.14044e-08, max. volume: 4.10267.
+
+# LU_SGS preconditioner.
+
+# FGMRES residual history
+# Residual tolerance target = 4.14044e-11
+# Initial residual norm     = 0.00535056
+     0     1
+     50     0.000108897
+     100     2.56782e-09
+# FGMRES final (true) residual:
+# Iteration = 124: |res|/|res0| = 3.65074e-11.
+
+Computing volumes of the grid elements.
+Non-linear iter.: 1/1. Linear iter.: 124. Min. area: 4.17707e-08. Error: 1.95335e-13.
+
+----------------------- Write deformed grid files -----------------------
+Merging grid connectivity.
+Merging grid coordinates.
+Writing .su2 file.
+Adding any FFD information to the SU2 file.
+
+Completed in 0.210800 seconds on 8 cores.
+
+------------------------- Exit Success (SU2_DEF) ------------------------
+
