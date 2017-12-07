@@ -4,27 +4,28 @@ import os, sys, shutil, copy
 sys.path.append(os.environ['SU2_RUN'])
 import SU2
 from optparse import OptionParser
+from datetime import datetime
 
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
 #                     PROBLEM DEFINITION                     #
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
 #Number of Hicks-Henne functions that will deform the mesh   #
-L=30                                                         #
+L=38                                                         #
 #Number of specimens in each generation                      #
 N=10                                                         #
 #Number generations to evolve                                #
-K=15                                                         #
+K=20                                                         #
 #Probability parameters                                      #
 p_c=0.5                                                      #
 p_m=0.1                                                      #
 #Minimum and maximum values of DV_VALUE allowed              #
-mini=-0.01                                                   #
-maxi=0.01                                                    #
+mini=-0.004                                                  #
+maxi=0.004                                                   #
 #Scaling factor                                              #
 scale=-0.001                                                 #
 #SU2 config variables                                        #
-nPart=8                                                      #
+nPart=1                                                      #
 file='inv_NACA0012_GA.cfg'                                   #
 OG_MESH=''                                                   #
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
@@ -47,7 +48,7 @@ def main():
         file=options.filename
     #Generate config  
     config=setupSU2()
-    #Run genetic algorithm
+    #Run genetic algorithm  
     GA(config)
 
          
@@ -60,7 +61,14 @@ def GA(config):
     maxFit=np.zeros(K)
     fit_bsf=-1E20
     bsf=[]
-	#Run K evolutions
+
+    #Set-up timing
+    time_file=open('tiempo.dat','w')
+    t_0=datetime.now()
+    time_file.write(str(t_0))
+    time_file.write('\n')
+    
+    #Run K evolutions
     for k in range(K):
 		print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 		print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")        
@@ -78,11 +86,18 @@ def GA(config):
 		#Generate new population (evolve 1 step)
 		P=mutation(p_m,combination_single_cross(p_c,selection_tournament(fit,P)))
 
+                #Save execution time in milliseconds (cummulative)
+                t_i=datetime.now()
+                d=t_i-t_0
+                time_file.write(str((d.microseconds)/1000))
+                time_file.write('\n')
+
     #Post-processing
     print('Best solution: ',bsf,' with score: ', fit_bsf/scale)
     avgDrag=avgFit/scale
     maxDrag=maxFit/scale
 
+    time_file.close()
     store_sol(avgDrag, maxDrag, bsf)
     
     plt.plot(avgFit,label='Average')
@@ -93,8 +108,8 @@ def GA(config):
 def setupSU2():        
     config=SU2.io.Config(file)
     print(file)
-    config.NUMBER_PART = 8
-    config.CONSOLE = 'CONCISE'
+    config.NUMBER_PART = 1
+   #config.CONSOLE = 'CONCISE'
     OG_MESH='mesh_NACA0012_inv.su2'#config.MESH_FILENAME
     kind_array=[]
     value_array=[]
