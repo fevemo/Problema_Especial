@@ -13,9 +13,9 @@ from datetime import datetime
 #Number of Hicks-Henne functions that will deform the mesh   #
 L=38                                                         #
 #Number of specimens in each generation                      #
-N=10                                                         #
+N=20                                                         #
 #Number generations to evolve                                #
-K=20                                                         #
+K=40                                                         #
 #Probability parameters                                      #
 p_c=0.5                                                      #
 p_m=0.1                                                      #
@@ -23,7 +23,7 @@ p_m=0.1                                                      #
 mini=-0.004                                                  #
 maxi=0.004                                                   #
 #Scaling factor                                              #
-scale=-0.001                                                 #
+scale=-1                                                     #
 #SU2 config variables                                        #
 nPart=1                                                      #
 file='inv_NACA0012_GA.cfg'                                   #
