@@ -1,0 +1,393 @@
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Computational Fluid Dynamics Code)         |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Compressible Euler equations.
+Mach number: 0.8.
+Angle of attack (AoA): 1.25 deg, and angle of sideslip (AoS): 0 deg.
+Read flow solution from: solution_flow.dat.
+Non-Dimensional simulation (P=1.0, Rho=1.0, T=1.0 at the farfield).
+The reference length/area (force coefficient) is 1.
+The reference length (moment computation) is 1.
+Reference origin (moment computation) is (0.25, 0, 0).
+Surface(s) where the force coefficients are evaluated: airfoil.
+Surface(s) plotted in the output file: airfoil.
+Surface(s) affected by the design variables: airfoil.
+Input mesh file name: mesh_NACA0012_inv_deform.su2
+
+---------------------- Space Numerical Integration ----------------------
+Jameson-Schmidt-Turkel scheme for the flow inviscid terms.
+JST viscous coefficients (1st, 2nd & 4th): 0.15, 0.5, 0.02.
+The method includes a grid stretching correction (p = 0.3).
+Second order integration.
+Gradient computation using Green-Gauss theorem.
+
+---------------------- Time Numerical Integration -----------------------
+Local time stepping (steady state simulation).
+Euler implicit method for the flow equations.
+V Multigrid Cycle, with 2 multigrid levels.
+Damping factor for the residual restriction: 1.
+Damping factor for the correction prolongation: 1.
+No CFL adaptation.
+Multigrid Level:                       0     1     2
+Courant-Friedrichs-Lewy number:       10
+MG PreSmooth coefficients:             1     2     3
+MG PostSmooth coefficients:            0     0     0
+MG CorrecSmooth coefficients:          0     0     0
+
+------------------------- Convergence Criteria --------------------------
+Maximum number of iterations: 1000.
+Reduce the density residual 6 orders of magnitude.
+The minimum bound for the density residual is 10^(-10).
+Start convergence criteria at iteration 10.
+
+-------------------------- Output Information ---------------------------
+Writing a flow solution every 250 iterations.
+Writing the convergence history every 1 iterations.
+The output file format is Paraview ASCII (.vtk).
+Convergence history file name: history_direct.
+Forces breakdown file name: forces_breakdown.dat.
+Surface flow coefficients file name: surface_flow.
+Flow variables file name: flow.
+Restart flow file name: restart_flow.dat.
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+10216 triangles.
+
+------------------------- Geometry Preprocessing ------------------------
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+Identifying edges and vertices.
+Computing centers of gravity.
+Setting the control volume structure.
+Area of the computational grid: 1.25e+03.
+Searching for the closest normal neighbors to the surfaces.
+Compute the surface curvature.
+Max K: 7.84e+03. Mean K: 35.7. Standard deviation K: 494.
+Checking for periodicity.
+Setting the multigrid structure.
+MG level: 0 -> CVs: 5233. Agglomeration rate 1/1.00. CFL 10.
+MG level: 1 -> CVs: 1533. Agglomeration rate 1/3.41. CFL 8.12.
+MG level: 2 -> CVs: 443. Agglomeration rate 1/3.46. CFL 6.55.
+Computing wall distances.
+Wetted area = 2.03 m.
+Area projection in the x-plane = 0.107 m, y-plane = 1 m.
+
+------------------------- Driver information --------------------------
+A Fluid driver has been instantiated.
+
+------------------------ Iteration Preprocessing ------------------------
+Zone 1: Euler/Navier-Stokes/RANS flow iteration.
+
+------------------------- Solver Preprocessing --------------------------
+Inviscid flow: Computing density based on free-stream
+temperature and pressure using the ideal gas law.
+Force coefficients computed using free-stream values.
+-- Input conditions:
+Fluid Model: STANDARD_AIR 
+Specific gas constant: 287.058 N.m/kg.K.
+Specific gas constant (non-dim): 1
+Specific Heat Ratio: 1.4
+Free-stream static pressure: 101325 Pa.
+Free-stream total pressure: 154454 Pa.
+Free-stream temperature: 288.15 K.
+Free-stream density: 1.22498 kg/m^3.
+Free-stream velocity: (272.173, 5.93883) m/s. Magnitude: 272.238 m/s (529.186 KTS).
+Free-stream total energy per unit mass: 243846 m^2/s^2.
+-- Reference values:
+Reference specific gas constant: 287.058 N.m/kg.K.
+Reference pressure: 101325 Pa.
+Reference temperature: 288.15 K.
+Reference density: 1.22498 kg/m^3.
+Reference velocity: 287.603 m/s.
+Reference energy per unit mass: 82715.8 m^2/s^2.
+-- Resulting non-dimensional state:
+Mach number (non-dim): 0.8
+Specific gas constant (non-dim): 1
+Free-stream temperature (non-dim): 1
+Free-stream pressure (non-dim): 1
+Free-stream density (non-dim): 1
+Free-stream velocity (non-dim): (0.946348, 0.0206494). Magnitude: 0.946573
+Free-stream total energy per unit mass (non-dim): 2.948
+
+Initialize Jacobian structure (Euler). MG level: 0.
+Initialize Jacobian structure (Euler). MG level: 1.
+Initialize Jacobian structure (Euler). MG level: 2.
+
+----------------- Integration and Numerics Preprocessing ----------------
+Integration Preprocessing.
+Numerics Preprocessing.
+
+------------------------------ Begin Solver -----------------------------
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.00078444. Max. DT: 5.54687. CFL: 8.11871.
+MG level: 2 -> Min. DT: 0.0010489. Max. DT: 7.41459. CFL: 6.5465.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -6.78009.
+Maximum residual point 105, located at (0.00752, 0.011549).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 3825   0.053805    -7.882741     -7.286365       0.066815       0.000445
+ 3826   0.052296    -7.946268     -7.343762       0.066817       0.000447
+ 3827   0.052553    -7.961143     -7.364187       0.066818       0.000448
+ 3828   0.052121    -7.930250     -7.329586       0.066820       0.000449
+ 3829   0.052233    -7.874535     -7.271840       0.066822       0.000450
+ 3830   0.052195    -7.840984     -7.240104       0.066824       0.000450
+ 3831   0.051956    -7.826100     -7.227781       0.066826       0.000450
+ 3832   0.051491    -7.815077     -7.218039       0.066828       0.000451
+ 3833   0.051189    -7.806793     -7.210518       0.066830       0.000451
+ 3834   0.051267    -7.797113     -7.200594       0.066831       0.000451
+ 3835   0.051057    -7.787928     -7.190787       0.066833       0.000451
+ 3836   0.050967    -7.787951     -7.191013       0.066834       0.000451
+ 3837   0.050787    -7.796378     -7.200028       0.066835       0.000451
+ 3838   0.050654    -7.810984     -7.215176       0.066837       0.000451
+ 3839   0.050590    -7.829651     -7.233933       0.066838       0.000451
+ 3840   0.050470    -7.850087     -7.253466       0.066839       0.000452
+ 3841   0.050445    -7.870138     -7.271229       0.066840       0.000452
+ 3842   0.050716    -7.888931     -7.286543       0.066841       0.000452
+ 3843   0.050671    -7.908046     -7.301884       0.066841       0.000452
+ 3844   0.050528    -7.931032     -7.321978       0.066842       0.000452
+ 3845   0.050592    -7.962044     -7.352022       0.066843       0.000452
+ 3846   0.050471    -8.003199     -7.394874       0.066844       0.000452
+ 3847   0.050402    -8.051310     -7.447452       0.066845       0.000452
+ 3848   0.050366    -8.099279     -7.501821       0.066846       0.000452
+ 3849   0.050390    -8.140124     -7.549419       0.066846       0.000452
+ 3850   0.050353    -8.171286     -7.586509       0.066847       0.000452
+ 3851   0.050281    -8.193188     -7.613133       0.066847       0.000452
+ 3852   0.050214    -8.207751     -7.631462       0.066848       0.000452
+ 3853   0.050817    -8.216808     -7.643575       0.066849       0.000452
+ 3854   0.050810    -8.222429     -7.651678       0.066849       0.000452
+ 3855   0.050708    -8.225582     -7.656487       0.066849       0.000452
+ 3856   0.050645    -8.227452     -7.659174       0.066850       0.000452
+ 3857   0.050597    -8.230060     -7.662253       0.066850       0.000452
+ 3858   0.050727    -8.234279     -7.666940       0.066851       0.000452
+ 3859   0.050714    -8.240040     -7.673257       0.066851       0.000452
+ 3860   0.050670    -8.247866     -7.681913       0.066851       0.000452
+ 3861   0.050706    -8.258810     -7.694267       0.066851       0.000452
+ 3862   0.050659    -8.273907     -7.711700       0.066852       0.000452
+ 3863   0.050589    -8.293954     -7.735409       0.066852       0.000452
+ 3864   0.050540    -8.318868     -7.765607       0.066852       0.000452
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.00078444. Max. DT: 5.54687. CFL: 8.11871.
+MG level: 2 -> Min. DT: 0.0010489. Max. DT: 7.41459. CFL: 6.5465.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -7.30362.
+Maximum residual point 1906, located at (0.603227, 0.284623).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 3865   0.050477    -8.347431     -7.801018       0.066853       0.000452
+ 3866   0.050512    -8.377436     -7.838768       0.066853       0.000452
+ 3867   0.050456    -8.406202     -7.874926       0.066853       0.000452
+ 3868   0.050459    -8.431254     -7.905859       0.066853       0.000452
+ 3869   0.050555    -8.450047     -7.928345       0.066853       0.000452
+ 3870   0.050570    -8.459666     -7.938337       0.066854       0.000452
+ 3871   0.050529    -8.462287     -7.938723       0.066854       0.000452
+ 3872   0.050493    -8.464346     -7.938909       0.066854       0.000452
+ 3873   0.050477    -8.468543     -7.942629       0.066854       0.000452
+ 3874   0.050452    -8.474514     -7.948926       0.066854       0.000452
+ 3875   0.050407    -8.475812     -7.948132       0.066854       0.000452
+ 3876   0.050377    -8.467358     -7.934585       0.066854       0.000452
+ 3877   0.050395    -8.462291     -7.926969       0.066855       0.000452
+ 3878   0.050513    -8.459003     -7.921790       0.066855       0.000452
+ 3879   0.050856    -8.458590     -7.920015       0.066855       0.000452
+ 3880   0.050987    -8.461704     -7.922719       0.066855       0.000452
+ 3881   0.051083    -8.467165     -7.928342       0.066855       0.000452
+ 3882   0.051094    -8.474525     -7.936250       0.066855       0.000452
+ 3883   0.051040    -8.483415     -7.945972       0.066855       0.000452
+ 3884   0.050995    -8.493718     -7.957400       0.066855       0.000452
+ 3885   0.050952    -8.505490     -7.970649       0.066855       0.000452
+ 3886   0.050922    -8.518851     -7.985893       0.066855       0.000452
+ 3887   0.050903    -8.533905     -8.003267       0.066855       0.000452
+ 3888   0.051016    -8.550710     -8.022849       0.066855       0.000452
+ 3889   0.051074    -8.569146     -8.044494       0.066855       0.000452
+ 3890   0.051062    -8.588770     -8.067626       0.066855       0.000452
+ 3891   0.051024    -8.608758     -8.091124       0.066855       0.000452
+ 3892   0.050996    -8.627869     -8.113238       0.066855       0.000452
+ 3893   0.050961    -8.643917     -8.130711       0.066855       0.000452
+ 3894   0.050920    -8.653172     -8.138622       0.066855       0.000452
+ 3895   0.050887    -8.666188     -8.154243       0.066855       0.000452
+ 3896   0.050888    -8.672407     -8.157695       0.066855       0.000452
+ 3897   0.050873    -8.659727     -8.136101       0.066855       0.000452
+ 3898   0.050862    -8.665088     -8.140544       0.066855       0.000452
+ 3899   0.050829    -8.674781     -8.150525       0.066855       0.000452
+ 3900   0.050817    -8.684292     -8.159202       0.066855       0.000452
+ 3901   0.050801    -8.696987     -8.171921       0.066855       0.000452
+ 3902   0.050765    -8.709489     -8.184351       0.066855       0.000452
+ 3903   0.050747    -8.721989     -8.196606       0.066855       0.000452
+ 3904   0.050720    -8.733376     -8.207129       0.066855       0.000452
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.00078444. Max. DT: 5.54687. CFL: 8.11871.
+MG level: 2 -> Min. DT: 0.0010489. Max. DT: 7.41459. CFL: 6.5465.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -7.57927.
+Maximum residual point 1183, located at (0.596854, 0.131537).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 3905   0.050693    -8.743771     -8.216273       0.066855       0.000452
+ 3906   0.050663    -8.754030     -8.225368       0.066855       0.000452
+ 3907   0.050642    -8.765062     -8.235650       0.066855       0.000452
+ 3908   0.050695    -8.777669     -8.248138       0.066855       0.000452
+ 3909   0.050691    -8.792200     -8.263239       0.066855       0.000452
+ 3910   0.050675    -8.808708     -8.280987       0.066855       0.000452
+ 3911   0.050657    -8.827062     -8.301185       0.066855       0.000452
+ 3912   0.050640    -8.847038     -8.323513       0.066855       0.000452
+ 3913   0.050617    -8.868363     -8.347581       0.066855       0.000452
+ 3914   0.050605    -8.890736     -8.372960       0.066855       0.000452
+ 3915   0.050592    -8.913803     -8.399140       0.066855       0.000452
+ 3916   0.050565    -8.937038     -8.425349       0.066855       0.000452
+ 3917   0.050537    -8.959418     -8.450060       0.066855       0.000452
+ 3918   0.050535    -8.978330     -8.469417       0.066855       0.000452
+ 3919   0.050530    -8.988581     -8.476401       0.066855       0.000452
+ 3920   0.050541    -8.995579     -8.479840       0.066855       0.000452
+ 3921   0.050622    -9.006867     -8.490609       0.066855       0.000452
+ 3922   0.050650    -9.023113     -8.509307       0.066856       0.000452
+ 3923   0.050629    -9.043052     -8.532215       0.066856       0.000452
+ 3924   0.050607    -9.061479     -8.551165       0.066856       0.000452
+ 3925   0.050582    -9.076397     -8.564058       0.066856       0.000452
+ 3926   0.050571    -9.089744     -8.574778       0.066856       0.000452
+ 3927   0.050589    -9.103655     -8.586697       0.066856       0.000452
+ 3928   0.050603    -9.118675     -8.600439       0.066856       0.000452
+ 3929   0.050607    -9.135294     -8.616457       0.066856       0.000452
+ 3930   0.050587    -9.153199     -8.634140       0.066856       0.000452
+ 3931   0.050570    -9.171536     -8.652218       0.066856       0.000452
+ 3932   0.050565    -9.189513     -8.669613       0.066856       0.000452
+ 3933   0.050542    -9.206668     -8.685793       0.066856       0.000452
+ 3934   0.050536    -9.223105     -8.701033       0.066856       0.000452
+ 3935   0.050525    -9.239371     -8.716181       0.066856       0.000452
+ 3936   0.050515    -9.256183     -8.732246       0.066856       0.000452
+ 3937   0.050491    -9.274166     -8.750044       0.066856       0.000452
+ 3938   0.050489    -9.293690     -8.770003       0.066856       0.000452
+ 3939   0.050470    -9.314839     -8.792155       0.066856       0.000452
+ 3940   0.050464    -9.337472     -8.816229       0.066856       0.000452
+ 3941   0.050470    -9.361314     -8.841796       0.066856       0.000452
+ 3942   0.050466    -9.386054     -8.868398       0.066856       0.000452
+ 3943   0.050449    -9.411397     -8.895627       0.066856       0.000452
+ 3944   0.050429    -9.437106     -8.923158       0.066856       0.000452
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.00078444. Max. DT: 5.54687. CFL: 8.11871.
+MG level: 2 -> Min. DT: 0.0010489. Max. DT: 7.41459. CFL: 6.5465.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -8.21991.
+Maximum residual point 407, located at (0.551932, 0.0591161).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 3945   0.050409    -9.463009     -8.950774       0.066856       0.000452
+ 3946   0.050394    -9.489028     -8.978383       0.066856       0.000452
+ 3947   0.050380    -9.515201     -9.006063       0.066856       0.000452
+ 3948   0.050391    -9.541703     -9.034079       0.066856       0.000452
+ 3949   0.050399    -9.568822     -9.062848       0.066856       0.000452
+ 3950   0.050388    -9.596888     -9.092824       0.066856       0.000452
+ 3951   0.050382    -9.626184     -9.124365       0.066856       0.000452
+ 3952   0.050363    -9.656864     -9.157615       0.066856       0.000452
+ 3953   0.050350    -9.688907     -9.192440       0.066856       0.000452
+ 3954   0.050331    -9.722105     -9.228433       0.066856       0.000452
+ 3955   0.050321    -9.756042     -9.264915       0.066856       0.000452
+ 3956   0.050314    -9.790076     -9.300980       0.066856       0.000452
+ 3957   0.050304    -9.823508     -9.335733       0.066856       0.000452
+ 3958   0.050296    -9.854948     -9.367190       0.066856       0.000452
+ 3959   0.050308    -9.883948     -9.394962       0.066856       0.000452
+ 3960   0.050329    -9.903414     -9.408521       0.066856       0.000452
+ 3961   0.050364    -9.928958     -9.435669       0.066856       0.000452
+ 3962   0.050383    -9.950948     -9.454603       0.066856       0.000452
+ 3963   0.050374    -9.949550     -9.442092       0.066856       0.000452
+ 3964   0.050359    -9.958530     -9.445514       0.066856       0.000452
+ 3965   0.050354    -9.980646     -9.467791       0.066856       0.000452
+ 3966   0.050350   -10.011596     -9.503478       0.066856       0.000452
+
+-------------------------- File Output Summary --------------------------
+Writing comma-separated values (CSV) surface files.
+Merging connectivities in the Master node.
+Merging coordinates in the Master node.
+Merging solution in the Master node.
+Writing SU2 native restart file.
+Writing Paraview ASCII volume solution file.
+Writing Paraview ASCII surface solution file.
+Writing the forces breakdown file.
+-------------------------------------------------------------------------
+
+History file, closed.
+
+------------------------- Solver Postprocessing -------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterpolator container.
+Deleted CTransfer container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+Completed in 7.240027 seconds on 1 core.
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+
