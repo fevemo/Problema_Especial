@@ -1,0 +1,870 @@
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Computational Fluid Dynamics Code)         |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Continuous Euler adjoint equations.
+Mach number: 0.8.
+Angle of attack (AoA): 1.25 deg, and angle of sideslip (AoS): 0 deg.
+Read adjoint solution from: solution_adj.dat.
+Read flow solution from: solution_flow.dat.
+Non-Dimensional simulation (P=1.0, Rho=1.0, T=1.0 at the farfield).
+The reference length/area (force coefficient) is 1.
+The reference length (moment computation) is 1.
+Reference origin (moment computation) is (0.25, 0, 0).
+Surface(s) where the force coefficients are evaluated: airfoil.
+Surface(s) plotted in the output file: airfoil.
+Surface(s) affected by the design variables: airfoil.
+Input mesh file name: mesh_deform.su2
+
+----------------------- Design problem definition -----------------------
+CD objective function.
+
+---------------------- Space Numerical Integration ----------------------
+Jameson-Schmidt-Turkel scheme for the adjoint inviscid terms.
+JST viscous coefficients (1st, 2nd, & 4th): 0.15, 0, 0.02.
+The method includes a grid stretching correction (p = 0.3).
+Second order integration.
+The reference sharp edge distance is: 0.15. 
+Gradient computation using Green-Gauss theorem.
+
+---------------------- Time Numerical Integration -----------------------
+Local time stepping (steady state simulation).
+Euler implicit method for the adjoint equations.
+V Multigrid Cycle, with 2 multigrid levels.
+Damping factor for the residual restriction: 1.
+Damping factor for the correction prolongation: 1.
+No CFL adaptation.
+Multigrid Level:                       0     1     2
+Courant-Friedrichs-Lewy number:        8
+MG PreSmooth coefficients:             1     2     3
+MG PostSmooth coefficients:            0     0     0
+MG CorrecSmooth coefficients:          0     0     0
+
+------------------------- Convergence Criteria --------------------------
+Maximum number of iterations: 1000.
+Reduce the adjoint density residual 6 orders of magnitude.
+The minimum value for the adjoint density residual is 10^(-10).
+
+-------------------------- Output Information ---------------------------
+Writing a flow solution every 250 iterations.
+Writing the convergence history every 1 iterations.
+The output file format is Paraview ASCII (.vtk).
+Convergence history file name: history_adjoint.
+Forces breakdown file name: forces_breakdown.dat.
+Adjoint solution file name: solution_adj.dat.
+Restart adjoint file name: restart_adj.dat.
+Adjoint variables file name: adjoint.
+Surface adjoint coefficients file name: surface_adjoint.
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+10216 triangles.
+
+------------------------- Geometry Preprocessing ------------------------
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+Identifying edges and vertices.
+Computing centers of gravity.
+Setting the control volume structure.
+Area of the computational grid: 1.25e+03.
+Searching for the closest normal neighbors to the surfaces.
+Compute the surface curvature.
+Max K: 7.84e+03. Mean K: 37. Standard deviation K: 495.
+Checking for periodicity.
+Setting the multigrid structure.
+MG level: 0 -> CVs: 5233. Agglomeration rate 1/1.00. CFL 8.
+MG level: 1 -> CVs: 1533. Agglomeration rate 1/3.41. CFL 6.49.
+MG level: 2 -> CVs: 443. Agglomeration rate 1/3.46. CFL 5.24.
+Computing wall distances.
+Wetted area = 2.03 m.
+Area projection in the x-plane = 0.0913 m, y-plane = 1 m.
+
+------------------------- Driver information --------------------------
+A Fluid driver has been instantiated.
+
+------------------------ Iteration Preprocessing ------------------------
+Zone 1: adjoint Euler/Navier-Stokes/RANS flow iteration.
+
+------------------------- Solver Preprocessing --------------------------
+Inviscid flow: Computing density based on free-stream
+temperature and pressure using the ideal gas law.
+Force coefficients computed using free-stream values.
+-- Input conditions:
+Fluid Model: STANDARD_AIR 
+Specific gas constant: 287.058 N.m/kg.K.
+Specific gas constant (non-dim): 1
+Specific Heat Ratio: 1.4
+Free-stream static pressure: 101325 Pa.
+Free-stream total pressure: 154454 Pa.
+Free-stream temperature: 288.15 K.
+Free-stream density: 1.22498 kg/m^3.
+Free-stream velocity: (272.173, 5.93883) m/s. Magnitude: 272.238 m/s (529.186 KTS).
+Free-stream total energy per unit mass: 243846 m^2/s^2.
+-- Reference values:
+Reference specific gas constant: 287.058 N.m/kg.K.
+Reference pressure: 101325 Pa.
+Reference temperature: 288.15 K.
+Reference density: 1.22498 kg/m^3.
+Reference velocity: 287.603 m/s.
+Reference energy per unit mass: 82715.8 m^2/s^2.
+-- Resulting non-dimensional state:
+Mach number (non-dim): 0.8
+Specific gas constant (non-dim): 1
+Free-stream temperature (non-dim): 1
+Free-stream pressure (non-dim): 1
+Free-stream density (non-dim): 1
+Free-stream velocity (non-dim): (0.946348, 0.0206494). Magnitude: 0.946573
+Free-stream total energy per unit mass (non-dim): 2.948
+
+Initialize Jacobian structure (Euler). MG level: 0.
+Initialize Jacobian structure (Adjoint Euler). MG level: 0.
+Initialize Jacobian structure (Euler). MG level: 1.
+Initialize Jacobian structure (Adjoint Euler). MG level: 1.
+Initialize Jacobian structure (Euler). MG level: 2.
+Initialize Jacobian structure (Adjoint Euler). MG level: 2.
+
+----------------- Integration and Numerics Preprocessing ----------------
+Integration Preprocessing.
+Numerics Preprocessing.
+
+------------------------------ Begin Solver -----------------------------
+Begin direct solver to store flow data (single iteration).
+Compute residuals to check the convergence of the direct problem.
+log10[Maximum residual]: -8.77461, located at point 362.
+End direct solver, begin adjoint problem.
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000394348. Max. DT: 2.90696. CFL: 8.
+MG level: 1 -> Min. DT: 0.000625471. Max. DT: 4.44277. CFL: 6.49497.
+MG level: 2 -> Min. DT: 0.000841034. Max. DT: 5.93996. CFL: 5.2372.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -4.6824.
+Maximum residual point 140, located at (0.35604, 0.0457329).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  660   0.140606      -5.768085      -5.692892   -2.0108e-01    5.0301e-04
+  661   0.099409      -5.434135      -5.687387   -2.0901e-01    4.9901e-04
+  662   0.086131      -5.333119      -5.838831   -2.1910e-01    4.8586e-04
+  663   0.079310      -5.318458      -5.813745   -2.1850e-01    4.6233e-04
+  664   0.075152      -5.279476      -5.838958   -2.1905e-01    4.3409e-04
+  665   0.072392      -5.274831      -5.827962   -2.1732e-01    4.1180e-04
+  666   0.070567      -5.287204      -5.831669   -2.1657e-01    3.9561e-04
+  667   0.069085      -5.295799      -5.846942   -2.1768e-01    3.8023e-04
+  668   0.067865      -5.317000      -5.851335   -2.1999e-01    3.6180e-04
+  669   0.066812      -5.339219      -5.858331   -2.2311e-01    3.3892e-04
+  670   0.066014      -5.352931      -5.866521   -2.2667e-01    3.1281e-04
+  671   0.066083      -5.361738      -5.866087   -2.3029e-01    2.8538e-04
+  672   0.067000      -5.365124      -5.858483   -2.3374e-01    2.5825e-04
+  673   0.067829      -5.361316      -5.846704   -2.3685e-01    2.3249e-04
+  674   0.067509      -5.352026      -5.830973   -2.3953e-01    2.0870e-04
+  675   0.067129      -5.339565      -5.812841   -2.4170e-01    1.8713e-04
+  676   0.066667      -5.325980      -5.795319   -2.4331e-01    1.6786e-04
+  677   0.066285      -5.313319      -5.781073   -2.4442e-01    1.5100e-04
+  678   0.065889      -5.303349      -5.771549   -2.4515e-01    1.3663e-04
+  679   0.065523      -5.297512      -5.767000   -2.4536e-01    1.2481e-04
+  680   0.065239      -5.297511      -5.768828   -2.4496e-01    1.1555e-04
+  681   0.064940      -5.303981      -5.778493   -2.4421e-01    1.0883e-04
+  682   0.064599      -5.316546      -5.795729   -2.4328e-01    1.0452e-04
+  683   0.064419      -5.334511      -5.820134   -2.4226e-01    1.0226e-04
+  684   0.064170      -5.356517      -5.850275   -2.4121e-01    1.0159e-04
+  685   0.063991      -5.380536      -5.884062   -2.4017e-01    1.0217e-04
+  686   0.063776      -5.404463      -5.919788   -2.3919e-01    1.0383e-04
+  687   0.063577      -5.426677      -5.955588   -2.3831e-01    1.0650e-04
+  688   0.063499      -5.446550      -5.989239   -2.3758e-01    1.1005e-04
+  689   0.063313      -5.464854      -6.019357   -2.3706e-01    1.1426e-04
+  690   0.063137      -5.483456      -6.046152   -2.3675e-01    1.1878e-04
+  691   0.062969      -5.504510      -6.070845   -2.3667e-01    1.2325e-04
+  692   0.062985      -5.529754      -6.094698   -2.3680e-01    1.2737e-04
+  693   0.063038      -5.560102      -6.118445   -2.3714e-01    1.3088e-04
+  694   0.062889      -5.595415      -6.142134   -2.3766e-01    1.3362e-04
+  695   0.062754      -5.634324      -6.165249   -2.3832e-01    1.3548e-04
+  696   0.062629      -5.674171      -6.187134   -2.3908e-01    1.3639e-04
+  697   0.062488      -5.711335      -6.207567   -2.3990e-01    1.3635e-04
+  698   0.062397      -5.742231      -6.226754   -2.4072e-01    1.3540e-04
+  699   0.062290      -5.764769      -6.244486   -2.4146e-01    1.3355e-04
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003943. Max. DT: 2.907. CFL: 8.
+MG level: 1 -> Min. DT: 0.0006255. Max. DT: 4.443. CFL: 6.495.
+MG level: 2 -> Min. DT: 0.000841. Max. DT: 5.94. CFL: 5.237.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -4.866.
+Maximum residual point 5041, located at (-10.39, -3.019).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  700   0.062229      -5.779156      -6.260495   -2.4209e-01    1.3092e-04
+  701   0.062119      -5.786481      -6.274831   -2.4272e-01    1.2755e-04
+  702   0.062014      -5.791359      -6.293390   -2.4312e-01    1.2367e-04
+  703   0.061946      -5.799287      -6.310498   -2.4323e-01    1.1947e-04
+  704   0.061880      -5.809682      -6.323305   -2.4315e-01    1.1511e-04
+  705   0.061816      -5.824941      -6.332645   -2.4290e-01    1.1067e-04
+  706   0.061748      -5.845464      -6.342999   -2.4254e-01    1.0613e-04
+  707   0.061670      -5.872742      -6.358366   -2.4210e-01    1.0152e-04
+  708   0.061587      -5.906299      -6.378365   -2.4160e-01    9.7125e-05
+  709   0.061552      -5.943128      -6.401147   -2.4106e-01    9.3297e-05
+  710   0.061479      -5.979040      -6.425699   -2.4052e-01    9.0271e-05
+  711   0.061410      -6.009859      -6.450540   -2.4001e-01    8.8089e-05
+  712   0.061358      -6.033154      -6.474711   -2.3958e-01    8.6637e-05
+  713   0.061295      -6.049129      -6.497504   -2.3926e-01    8.5759e-05
+  714   0.061221      -6.060322      -6.518649   -2.3908e-01    8.5342e-05
+  715   0.061151      -6.070213      -6.537988   -2.3902e-01    8.5317e-05
+  716   0.061106      -6.081819      -6.555854   -2.3910e-01    8.5636e-05
+  717   0.061086      -6.097166      -6.572984   -2.3928e-01    8.6245e-05
+  718   0.061041      -6.117387      -6.590327   -2.3955e-01    8.7082e-05
+  719   0.060979      -6.142829      -6.608838   -2.3988e-01    8.8069e-05
+  720   0.060917      -6.173016      -6.629229   -2.4024e-01    8.9126e-05
+  721   0.060884      -6.206623      -6.651643   -2.4061e-01    9.0173e-05
+  722   0.060866      -6.241533      -6.675405   -2.4095e-01    9.1142e-05
+  723   0.060841      -6.275180      -6.699107   -2.4124e-01    9.1976e-05
+  724   0.060812      -6.305344      -6.721212   -2.4147e-01    9.2634e-05
+  725   0.060774      -6.331023      -6.741171   -2.4162e-01    9.3075e-05
+  726   0.060731      -6.352454      -6.759448   -2.4171e-01    9.3262e-05
+  727   0.060779      -6.370787      -6.776373   -2.4174e-01    9.3169e-05
+  728   0.060784      -6.387903      -6.792555   -2.4171e-01    9.2809e-05
+  729   0.060759      -6.405459      -6.808767   -2.4163e-01    9.2233e-05
+  730   0.060723      -6.424561      -6.825492   -2.4149e-01    9.1511e-05
+  731   0.060683      -6.445899      -6.843234   -2.4133e-01    9.0707e-05
+  732   0.060663      -6.469501      -6.862454   -2.4114e-01    8.9870e-05
+  733   0.060637      -6.494501      -6.883105   -2.4095e-01    8.9040e-05
+  734   0.060606      -6.519358      -6.904631   -2.4077e-01    8.8256e-05
+  735   0.060573      -6.542331      -6.926106   -2.4060e-01    8.7554e-05
+  736   0.060544      -6.561920      -6.946414   -2.4045e-01    8.6966e-05
+  737   0.060498      -6.577302      -6.964682   -2.4034e-01    8.6520e-05
+  738   0.060464      -6.588749      -6.980770   -2.4025e-01    8.6233e-05
+  739   0.060443      -6.597879      -6.996007   -2.4018e-01    8.6116e-05
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003943. Max. DT: 2.907. CFL: 8.
+MG level: 1 -> Min. DT: 0.0006255. Max. DT: 4.443. CFL: 6.495.
+MG level: 2 -> Min. DT: 0.000841. Max. DT: 5.94. CFL: 5.237.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -5.657.
+Maximum residual point 427, located at (0.06922, 0.03401).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  740   0.060430      -6.607590      -7.014238   -2.4013e-01    8.6155e-05
+  741   0.060421      -6.619290      -7.036871   -2.4014e-01    8.6294e-05
+  742   0.060395      -6.628892      -7.049016   -2.4017e-01    8.6516e-05
+  743   0.060392      -6.640094      -7.062634   -2.4022e-01    8.6843e-05
+  744   0.060395      -6.652014      -7.075438   -2.4028e-01    8.7283e-05
+  745   0.060396      -6.668751      -7.090730   -2.4035e-01    8.7821e-05
+  746   0.060366      -6.692359      -7.113200   -2.4043e-01    8.8409e-05
+  747   0.060338      -6.722250      -7.140301   -2.4051e-01    8.8997e-05
+  748   0.060312      -6.757788      -7.171715   -2.4059e-01    8.9544e-05
+  749   0.060282      -6.796994      -7.206826   -2.4067e-01    9.0023e-05
+  750   0.060254      -6.836758      -7.243612   -2.4074e-01    9.0416e-05
+  751   0.060231      -6.873486      -7.280443   -2.4079e-01    9.0718e-05
+  752   0.060211      -6.903499      -7.314331   -2.4082e-01    9.0940e-05
+  753   0.060197      -6.924142      -7.340498   -2.4084e-01    9.1085e-05
+  754   0.060194      -6.936816      -7.361812   -2.4084e-01    9.1135e-05
+  755   0.060204      -6.945134      -7.383577   -2.4082e-01    9.1084e-05
+  756   0.060454      -6.951440      -7.402410   -2.4079e-01    9.0944e-05
+  757   0.060702      -6.958006      -7.418549   -2.4075e-01    9.0731e-05
+  758   0.060731      -6.967349      -7.437124   -2.4070e-01    9.0469e-05
+  759   0.060801      -6.979649      -7.456847   -2.4064e-01    9.0181e-05
+  760   0.060828      -6.994685      -7.476721   -2.4058e-01    8.9890e-05
+  761   0.060810      -7.010422      -7.495733   -2.4052e-01    8.9612e-05
+  762   0.060802      -7.023958      -7.510477   -2.4046e-01    8.9359e-05
+  763   0.060778      -7.035401      -7.523531   -2.4042e-01    8.9142e-05
+  764   0.060779      -7.044707      -7.534388   -2.4039e-01    8.8967e-05
+  765   0.060753      -7.053390      -7.544664   -2.4036e-01    8.8843e-05
+  766   0.060724      -7.062302      -7.555123   -2.4035e-01    8.8775e-05
+  767   0.060697      -7.072163      -7.566334   -2.4034e-01    8.8768e-05
+  768   0.060676      -7.083889      -7.578987   -2.4035e-01    8.8819e-05
+  769   0.060650      -7.098666      -7.594237   -2.4037e-01    8.8918e-05
+  770   0.060621      -7.117802      -7.613357   -2.4039e-01    8.9052e-05
+  771   0.060643      -7.142208      -7.637252   -2.4043e-01    8.9210e-05
+  772   0.060673      -7.171995      -7.666228   -2.4046e-01    8.9380e-05
+  773   0.060752      -7.206424      -7.700088   -2.4050e-01    8.9552e-05
+  774   0.060774      -7.243862      -7.738037   -2.4054e-01    8.9716e-05
+  775   0.060778      -7.281645      -7.778337   -2.4057e-01    8.9864e-05
+  776   0.060753      -7.316345      -7.818302   -2.4060e-01    8.9987e-05
+  777   0.060737      -7.344740      -7.854877   -2.4062e-01    9.0080e-05
+  778   0.060715      -7.365223      -7.885692   -2.4064e-01    9.0141e-05
+  779   0.060692      -7.378634      -7.909918   -2.4065e-01    9.0169e-05
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003943. Max. DT: 2.907. CFL: 8.
+MG level: 1 -> Min. DT: 0.0006255. Max. DT: 4.443. CFL: 6.495.
+MG level: 2 -> Min. DT: 0.000841. Max. DT: 5.94. CFL: 5.237.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -6.416.
+Maximum residual point 223, located at (-19.84, 2.507).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  780   0.060675      -7.387795      -7.928598   -2.4066e-01    9.0165e-05
+  781   0.060653      -7.396205      -7.944180   -2.4065e-01    9.0132e-05
+  782   0.060627      -7.406810      -7.959477   -2.4064e-01    9.0075e-05
+  783   0.060605      -7.421427      -7.976710   -2.4063e-01    8.9999e-05
+  784   0.060589      -7.440554      -7.996926   -2.4061e-01    8.9911e-05
+  785   0.060574      -7.463152      -8.019508   -2.4059e-01    8.9816e-05
+  786   0.060549      -7.486998      -8.043052   -2.4057e-01    8.9717e-05
+  787   0.060549      -7.510659      -8.067971   -2.4055e-01    8.9614e-05
+  788   0.060542      -7.532680      -8.091832   -2.4053e-01    8.9512e-05
+  789   0.060522      -7.548581      -8.108160   -2.4051e-01    8.9416e-05
+  790   0.060516      -7.561357      -8.123173   -2.4050e-01    8.9333e-05
+  791   0.060523      -7.570877      -8.134785   -2.4049e-01    8.9270e-05
+  792   0.060517      -7.577972      -8.140212   -2.4049e-01    8.9230e-05
+  793   0.060523      -7.585142      -8.143517   -2.4049e-01    8.9213e-05
+  794   0.060525      -7.593705      -8.148290   -2.4049e-01    8.9218e-05
+  795   0.060505      -7.604366      -8.155743   -2.4050e-01    8.9239e-05
+  796   0.060496      -7.618455      -8.167264   -2.4051e-01    8.9272e-05
+  797   0.060472      -7.637078      -8.184316   -2.4052e-01    8.9312e-05
+  798   0.060454      -7.659995      -8.206940   -2.4054e-01    8.9357e-05
+  799   0.060438      -7.685570      -8.233560   -2.4055e-01    8.9401e-05
+  800   0.060419      -7.711064      -8.261213   -2.4057e-01    8.9442e-05
+  801   0.060398      -7.733193      -8.285968   -2.4058e-01    8.9476e-05
+  802   0.060397      -7.749068      -8.303973   -2.4059e-01    8.9501e-05
+  803   0.060377      -7.757434      -8.313073   -2.4060e-01    8.9514e-05
+  804   0.060370      -7.759453      -8.314079   -2.4061e-01    8.9515e-05
+  805   0.060360      -7.758277      -8.310585   -2.4062e-01    8.9502e-05
+  806   0.060351      -7.757919      -8.307806   -2.4062e-01    8.9477e-05
+  807   0.060334      -7.762301      -8.312069   -2.4062e-01    8.9443e-05
+  808   0.060339      -7.768250      -8.313980   -2.4062e-01    8.9404e-05
+  809   0.060401      -7.774376      -8.306408   -2.4062e-01    8.9359e-05
+  810   0.060465      -7.784288      -8.314610   -2.4061e-01    8.9306e-05
+  811   0.060502      -7.801036      -8.329194   -2.4060e-01    8.9245e-05
+  812   0.060530      -7.827170      -8.351949   -2.4060e-01    8.9181e-05
+  813   0.060516      -7.860580      -8.382526   -2.4059e-01    8.9118e-05
+  814   0.060518      -7.898826      -8.418987   -2.4058e-01    8.9062e-05
+  815   0.060516      -7.938698      -8.460218   -2.4058e-01    8.9015e-05
+  816   0.060506      -7.975153      -8.501513   -2.4057e-01    8.8977e-05
+  817   0.060487      -8.004401      -8.539506   -2.4057e-01    8.8948e-05
+  818   0.060472      -8.024771      -8.572814   -2.4056e-01    8.8928e-05
+  819   0.060459      -8.035400      -8.597902   -2.4057e-01    8.8914e-05
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003943. Max. DT: 2.907. CFL: 8.
+MG level: 1 -> Min. DT: 0.0006255. Max. DT: 4.443. CFL: 6.495.
+MG level: 2 -> Min. DT: 0.000841. Max. DT: 5.94. CFL: 5.237.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -7.069.
+Maximum residual point 5185, located at (-15.47, -3.925).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  820   0.060447      -8.036146      -8.610012   -2.4057e-01    8.8907e-05
+  821   0.060435      -8.031800      -8.616567   -2.4057e-01    8.8908e-05
+  822   0.060421      -8.026984      -8.620643   -2.4057e-01    8.8919e-05
+  823   0.060401      -8.026247      -8.624993   -2.4058e-01    8.8936e-05
+  824   0.060401      -8.031199      -8.633673   -2.4058e-01    8.8958e-05
+  825   0.060390      -8.041853      -8.646642   -2.4059e-01    8.8980e-05
+  826   0.060400      -8.057053      -8.661662   -2.4059e-01    8.9001e-05
+  827   0.060397      -8.073937      -8.675135   -2.4060e-01    8.9019e-05
+  828   0.060383      -8.087851      -8.681852   -2.4061e-01    8.9034e-05
+  829   0.060380      -8.096858      -8.683364   -2.4061e-01    8.9044e-05
+  830   0.060373      -8.102718      -8.682792   -2.4061e-01    8.9050e-05
+  831   0.060367      -8.106761      -8.678834   -2.4062e-01    8.9051e-05
+  832   0.060352      -8.111154      -8.674101   -2.4062e-01    8.9047e-05
+  833   0.060335      -8.117690      -8.672111   -2.4062e-01    8.9038e-05
+  834   0.060318      -8.127454      -8.674318   -2.4062e-01    8.9023e-05
+  835   0.060304      -8.141413      -8.681494   -2.4061e-01    8.9005e-05
+  836   0.060291      -8.160790      -8.694842   -2.4061e-01    8.8984e-05
+  837   0.060275      -8.186384      -8.715201   -2.4061e-01    8.8962e-05
+  838   0.060357      -8.217968      -8.742386   -2.4061e-01    8.8940e-05
+  839   0.060427      -8.254233      -8.775445   -2.4060e-01    8.8919e-05
+  840   0.060487      -8.292687      -8.812655   -2.4060e-01    8.8900e-05
+  841   0.060501      -8.329512      -8.850985   -2.4060e-01    8.8884e-05
+  842   0.060499      -8.360263      -8.886470   -2.4059e-01    8.8872e-05
+  843   0.060487      -8.381572      -8.915599   -2.4059e-01    8.8863e-05
+  844   0.060479      -8.392994      -8.936743   -2.4059e-01    8.8859e-05
+  845   0.060466      -8.397332      -8.950814   -2.4059e-01    8.8858e-05
+  846   0.060454      -8.399009      -8.960717   -2.4059e-01    8.8860e-05
+  847   0.060445      -8.402058      -8.969829   -2.4059e-01    8.8866e-05
+  848   0.060436      -8.409050      -8.980624   -2.4059e-01    8.8873e-05
+  849   0.060422      -8.420953      -8.994192   -2.4059e-01    8.8882e-05
+  850   0.060407      -8.437533      -9.010629   -2.4060e-01    8.8893e-05
+  851   0.060391      -8.457929      -9.029549   -2.4060e-01    8.8903e-05
+  852   0.060384      -8.480759      -9.049931   -2.4060e-01    8.8915e-05
+  853   0.060372      -8.503955      -9.070194   -2.4060e-01    8.8925e-05
+  854   0.060373      -8.525750      -9.089223   -2.4060e-01    8.8935e-05
+  855   0.060367      -8.544642      -9.105321   -2.4061e-01    8.8942e-05
+  856   0.060359      -8.558966      -9.115817   -2.4061e-01    8.8948e-05
+  857   0.060359      -8.568225      -9.120374   -2.4061e-01    8.8951e-05
+  858   0.060358      -8.573453      -9.121275   -2.4061e-01    8.8951e-05
+  859   0.060356      -8.576776      -9.121315   -2.4061e-01    8.8949e-05
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003943. Max. DT: 2.907. CFL: 8.
+MG level: 1 -> Min. DT: 0.0006255. Max. DT: 4.443. CFL: 6.495.
+MG level: 2 -> Min. DT: 0.000841. Max. DT: 5.94. CFL: 5.237.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -7.607.
+Maximum residual point 5147, located at (-15.25, 0.913).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  860   0.060372      -8.580908      -9.123035   -2.4061e-01    8.8945e-05
+  861   0.060376      -8.588483      -9.128661   -2.4061e-01    8.8940e-05
+  862   0.060368      -8.601230      -9.139607   -2.4061e-01    8.8934e-05
+  863   0.060362      -8.619649      -9.156161   -2.4060e-01    8.8927e-05
+  864   0.060354      -8.643116      -9.177606   -2.4060e-01    8.8921e-05
+  865   0.060339      -8.669844      -9.202212   -2.4060e-01    8.8914e-05
+  866   0.060326      -8.696731      -9.227204   -2.4060e-01    8.8909e-05
+  867   0.060321      -8.719837      -9.249201   -2.4060e-01    8.8905e-05
+  868   0.060309      -8.735738      -9.265338   -2.4060e-01    8.8902e-05
+  869   0.060300      -8.743270      -9.274677   -2.4060e-01    8.8901e-05
+  870   0.060289      -8.744363      -9.278802   -2.4060e-01    8.8901e-05
+  871   0.060285      -8.743082      -9.281260   -2.4060e-01    8.8903e-05
+  872   0.060285      -8.743767      -9.286169   -2.4059e-01    8.8906e-05
+  873   0.060272      -8.748694      -9.294940   -2.4060e-01    8.8909e-05
+  874   0.060264      -8.754925      -9.298576   -2.4060e-01    8.8914e-05
+  875   0.060259      -8.763469      -9.304087   -2.4060e-01    8.8919e-05
+  876   0.060270      -8.775874      -9.316112   -2.4060e-01    8.8924e-05
+  877   0.060281      -8.795480      -9.333434   -2.4060e-01    8.8931e-05
+  878   0.060280      -8.823436      -9.359064   -2.4060e-01    8.8937e-05
+  879   0.060280      -8.857703      -9.391251   -2.4060e-01    8.8943e-05
+  880   0.060275      -8.895033      -9.427523   -2.4060e-01    8.8948e-05
+  881   0.060333      -8.931164      -9.465239   -2.4060e-01    8.8952e-05
+  882   0.060323      -8.961594      -9.501041   -2.4060e-01    8.8955e-05
+  883   0.060311      -8.981143      -9.528831   -2.4060e-01    8.8958e-05
+  884   0.060306      -8.988496      -9.542048   -2.4060e-01    8.8960e-05
+  885   0.060295      -8.988773      -9.552084   -2.4060e-01    8.8960e-05
+  886   0.060284      -8.985416      -9.557720   -2.4060e-01    8.8960e-05
+  887   0.060276      -8.984061      -9.560840   -2.4060e-01    8.8959e-05
+  888   0.060269      -8.987071      -9.567109   -2.4060e-01    8.8957e-05
+  889   0.060265      -8.995227      -9.577682   -2.4060e-01    8.8955e-05
+  890   0.060256      -9.008420      -9.591930   -2.4060e-01    8.8953e-05
+  891   0.060246      -9.024851      -9.608212   -2.4060e-01    8.8951e-05
+  892   0.060249      -9.042342      -9.624031   -2.4060e-01    8.8949e-05
+  893   0.060255      -9.058351      -9.637198   -2.4060e-01    8.8948e-05
+  894   0.060252      -9.070463      -9.646423   -2.4060e-01    8.8947e-05
+  895   0.060241      -9.074186      -9.645056   -2.4060e-01    8.8947e-05
+  896   0.060305      -9.071115      -9.635206   -2.4060e-01    8.8947e-05
+  897   0.060294      -9.068610      -9.629211   -2.4060e-01    8.8948e-05
+  898   0.060281      -9.068087      -9.623547   -2.4060e-01    8.8949e-05
+  899   0.060270      -9.073027      -9.621860   -2.4060e-01    8.8951e-05
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003943. Max. DT: 2.907. CFL: 8.
+MG level: 1 -> Min. DT: 0.0006255. Max. DT: 4.443. CFL: 6.495.
+MG level: 2 -> Min. DT: 0.000841. Max. DT: 5.94. CFL: 5.237.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -7.978.
+Maximum residual point 5022, located at (-9.478, 0.3091).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  900   0.060262      -9.084916      -9.627129   -2.4060e-01    8.8953e-05
+  901   0.060254      -9.103493      -9.638921   -2.4060e-01    8.8955e-05
+  902   0.060242      -9.128571      -9.657127   -2.4060e-01    8.8958e-05
+  903   0.060230      -9.160344      -9.682399   -2.4060e-01    8.8961e-05
+  904   0.060232      -9.198118      -9.714601   -2.4060e-01    8.8963e-05
+  905   0.060229      -9.239685      -9.752487   -2.4060e-01    8.8965e-05
+  906   0.060225      -9.281392      -9.793817   -2.4060e-01    8.8967e-05
+  907   0.060220      -9.318715      -9.835248   -2.4060e-01    8.8969e-05
+  908   0.060213      -9.347638      -9.873061   -2.4060e-01    8.8970e-05
+  909   0.060224      -9.366453      -9.904450   -2.4060e-01    8.8971e-05
+  910   0.060214      -9.376737      -9.928594   -2.4060e-01    8.8972e-05
+
+-------------------------- File Output Summary --------------------------
+Writing comma-separated values (CSV) surface files.
+Merging connectivities in the Master node.
+Merging coordinates in the Master node.
+Merging solution in the Master node.
+Writing SU2 native restart file.
+Writing Paraview ASCII volume solution file.
+Writing Paraview ASCII surface solution file.
+-------------------------------------------------------------------------
+
+  911   0.060401      -9.382328      -9.946792   -2.4060e-01    8.8972e-05
+  912   0.060404      -9.387311      -9.961619   -2.4060e-01    8.8972e-05
+  913   0.060401      -9.394528      -9.975545   -2.4060e-01    8.8971e-05
+  914   0.060397      -9.405106      -9.989911   -2.4060e-01    8.8971e-05
+  915   0.060383      -9.418762     -10.004953   -2.4060e-01    8.8970e-05
+  916   0.060374      -9.434535     -10.020350   -2.4060e-01    8.8969e-05
+  917   0.060366      -9.450986     -10.034975   -2.4060e-01    8.8968e-05
+  918   0.060359      -9.466153     -10.047127   -2.4060e-01    8.8968e-05
+  919   0.060351      -9.478837     -10.056361   -2.4060e-01    8.8967e-05
+  920   0.060351      -9.488742     -10.062093   -2.4060e-01    8.8966e-05
+  921   0.060401      -9.495780     -10.062859   -2.4060e-01    8.8966e-05
+  922   0.060507      -9.500703     -10.059527   -2.4060e-01    8.8966e-05
+  923   0.060532      -9.504757     -10.054836   -2.4060e-01    8.8966e-05
+  924   0.060538      -9.509409     -10.051331   -2.4060e-01    8.8966e-05
+  925   0.060548      -9.516408     -10.051073   -2.4060e-01    8.8967e-05
+  926   0.060549      -9.527600     -10.055842   -2.4060e-01    8.8968e-05
+  927   0.060550      -9.544360     -10.066811   -2.4060e-01    8.8969e-05
+  928   0.060548      -9.567210     -10.084308   -2.4060e-01    8.8970e-05
+  929   0.060548      -9.595801     -10.107980   -2.4060e-01    8.8970e-05
+  930   0.060543      -9.628889     -10.136891   -2.4060e-01    8.8971e-05
+  931   0.060541      -9.664073     -10.169196   -2.4060e-01    8.8972e-05
+  932   0.060543      -9.697614     -10.201920   -2.4060e-01    8.8973e-05
+  933   0.060531      -9.725226     -10.231587   -2.4060e-01    8.8973e-05
+  934   0.060521      -9.743814     -10.255366   -2.4060e-01    8.8974e-05
+  935   0.060516      -9.753137     -10.272197   -2.4060e-01    8.8974e-05
+  936   0.060507      -9.756003     -10.283193   -2.4060e-01    8.8974e-05
+  937   0.060500      -9.756728     -10.291147   -2.4060e-01    8.8974e-05
+  938   0.060489      -9.759296     -10.299245   -2.4060e-01    8.8974e-05
+  939   0.060482      -9.766405     -10.309938   -2.4060e-01    8.8974e-05
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003943. Max. DT: 2.907. CFL: 8.
+MG level: 1 -> Min. DT: 0.0006255. Max. DT: 4.443. CFL: 6.495.
+MG level: 2 -> Min. DT: 0.000841. Max. DT: 5.94. CFL: 5.237.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -8.738.
+Maximum residual point 5097, located at (-11.66, -0.3774).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  940   0.060473      -9.779276     -10.324405   -2.4060e-01    8.8973e-05
+  941   0.060467      -9.797744     -10.342549   -2.4060e-01    8.8973e-05
+  942   0.060486      -9.820702     -10.363738   -2.4060e-01    8.8972e-05
+  943   0.060485      -9.846825     -10.387495   -2.4060e-01    8.8972e-05
+  944   0.060478      -9.874374     -10.412489   -2.4060e-01    8.8971e-05
+  945   0.060475      -9.900553     -10.435966   -2.4060e-01    8.8971e-05
+  946   0.060475      -9.923524     -10.456831   -2.4060e-01    8.8971e-05
+  947   0.060473      -9.942256     -10.474720   -2.4060e-01    8.8970e-05
+  948   0.060467      -9.955263     -10.486683   -2.4060e-01    8.8970e-05
+  949   0.060459      -9.963088     -10.492842   -2.4060e-01    8.8970e-05
+  950   0.060450      -9.967645     -10.496250   -2.4060e-01    8.8970e-05
+  951   0.060439      -9.971276     -10.499517   -2.4060e-01    8.8970e-05
+  952   0.060427      -9.976604     -10.504692   -2.4060e-01    8.8970e-05
+  953   0.060418      -9.985930     -10.513706   -2.4060e-01    8.8971e-05
+  954   0.060415     -10.000324     -10.527557   -2.4060e-01    8.8971e-05
+
+-------------------------- File Output Summary --------------------------
+Writing comma-separated values (CSV) surface files.
+Merging connectivities in the Master node.
+Merging coordinates in the Master node.
+Merging solution in the Master node.
+Writing SU2 native restart file.
+Writing Paraview ASCII volume solution file.
+Writing Paraview ASCII surface solution file.
+-------------------------------------------------------------------------
+
+History file, closed.
+
+------------------------- Solver Postprocessing -------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterpolator container.
+Deleted CTransfer container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+Completed in 17.8935 seconds on 1 core.
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Gradient Projection Code)                  |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Input mesh file name: mesh_deform.su2
+Input sensitivity file name: surface_adjoint.
+
+-------------------- Surface deformation parameters ---------------------
+Design variables definition (markers <-> value <-> param):
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.05 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.1 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.15 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.2 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.25 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.3 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.35 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.4 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.45 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.5 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.55 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.6 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.65 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.7 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.75 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.8 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.85 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.9 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.95 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.05 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.1 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.15 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.2 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.25 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.3 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.35 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.4 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.45 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.5 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.55 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.6 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.65 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.7 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.75 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.8 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.85 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.9 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.95 )
+
+----------------------- Design problem definition -----------------------
+CD objective function.
+
+-------------------------- Output Information ---------------------------
+Output gradient file name: of_grad.dat. 
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+10216 triangles.
+
+----------------------- Preprocessing computations ----------------------
+Setting local point connectivity.
+Checking the numerical grid orientation.
+Identify edges and vertices.
+Computing centers of gravity.
+Setting the bound control volume structure.
+Reading surface sensitivities at each node from file.
+
+---------- Start gradient evaluation using sensitivity information ----------
+Evaluate functional gradient using Finite Differences.
+
+Design variable (HICKS_HENNE) number 0.
+DRAG gradient : -0.032378
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 1.
+DRAG gradient : -0.00286614
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 2.
+DRAG gradient : 0.0114765
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 3.
+DRAG gradient : 0.0157073
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 4.
+DRAG gradient : 0.013046
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 5.
+DRAG gradient : 0.00635776
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 6.
+DRAG gradient : -0.00162786
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 7.
+DRAG gradient : -0.00860262
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 8.
+DRAG gradient : -0.013095
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 9.
+DRAG gradient : -0.0147038
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 10.
+DRAG gradient : -0.0139348
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 11.
+DRAG gradient : -0.0116309
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 12.
+DRAG gradient : -0.00825989
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 13.
+DRAG gradient : -0.0035332
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 14.
+DRAG gradient : 0.00300806
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 15.
+DRAG gradient : 0.00945527
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 16.
+DRAG gradient : 0.00740686
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 17.
+DRAG gradient : -0.00347059
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 18.
+DRAG gradient : 0.039836
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 19.
+DRAG gradient : -0.032709
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 20.
+DRAG gradient : 0.00827511
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 21.
+DRAG gradient : 0.0267882
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 22.
+DRAG gradient : 0.0317466
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 23.
+DRAG gradient : 0.0267094
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 24.
+DRAG gradient : 0.0149487
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 25.
+DRAG gradient : 0.000535755
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 26.
+DRAG gradient : -0.012056
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 27.
+DRAG gradient : -0.0191286
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 28.
+DRAG gradient : -0.019109
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 29.
+DRAG gradient : -0.0133124
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 30.
+DRAG gradient : -0.00540454
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 31.
+DRAG gradient : 0.000596302
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 32.
+DRAG gradient : 0.00280352
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 33.
+DRAG gradient : 0.0024541
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 34.
+DRAG gradient : 0.00219655
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 35.
+DRAG gradient : 0.00345328
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 36.
+DRAG gradient : 0.00470983
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 37.
+DRAG gradient : -0.00635907
+-------------------------------------------------------------------------
+
+Completed in 0.021107 seconds on 1 core.
+
+------------------------- Exit Success (SU2_DOT) ------------------------
+

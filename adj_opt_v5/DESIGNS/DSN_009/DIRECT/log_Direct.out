@@ -1,0 +1,478 @@
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Computational Fluid Dynamics Code)         |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Compressible Euler equations.
+Mach number: 0.8.
+Angle of attack (AoA): 1.25 deg, and angle of sideslip (AoS): 0 deg.
+Read flow solution from: solution_flow.dat.
+Non-Dimensional simulation (P=1.0, Rho=1.0, T=1.0 at the farfield).
+The reference length/area (force coefficient) is 1.
+The reference length (moment computation) is 1.
+Reference origin (moment computation) is (0.25, 0, 0).
+Surface(s) where the force coefficients are evaluated: airfoil.
+Surface(s) plotted in the output file: airfoil.
+Surface(s) affected by the design variables: airfoil.
+Input mesh file name: mesh_deform.su2
+
+---------------------- Space Numerical Integration ----------------------
+Jameson-Schmidt-Turkel scheme for the flow inviscid terms.
+JST viscous coefficients (1st, 2nd & 4th): 0.15, 0.5, 0.02.
+The method includes a grid stretching correction (p = 0.3).
+Second order integration.
+Gradient computation using Green-Gauss theorem.
+
+---------------------- Time Numerical Integration -----------------------
+Local time stepping (steady state simulation).
+Euler implicit method for the flow equations.
+V Multigrid Cycle, with 2 multigrid levels.
+Damping factor for the residual restriction: 1.
+Damping factor for the correction prolongation: 1.
+No CFL adaptation.
+Multigrid Level:                       0     1     2
+Courant-Friedrichs-Lewy number:       10
+MG PreSmooth coefficients:             1     2     3
+MG PostSmooth coefficients:            0     0     0
+MG CorrecSmooth coefficients:          0     0     0
+
+------------------------- Convergence Criteria --------------------------
+Maximum number of iterations: 1000.
+Reduce the density residual 6 orders of magnitude.
+The minimum bound for the density residual is 10^(-10).
+Start convergence criteria at iteration 10.
+
+-------------------------- Output Information ---------------------------
+Writing a flow solution every 250 iterations.
+Writing the convergence history every 1 iterations.
+The output file format is Paraview ASCII (.vtk).
+Convergence history file name: history_direct.
+Forces breakdown file name: forces_breakdown.dat.
+Surface flow coefficients file name: surface_flow.
+Flow variables file name: flow.
+Restart flow file name: restart_flow.dat.
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points before parallel partitioning.
+Performing linear partitioning of the grid nodes.
+10216 interior elements before parallel partitioning.
+Calling the partitioning functions.
+Building the graph adjacency structure.
+Distributing elements across all ranks.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+Calling ParMETIS...
+Finished partitioning using ParMETIS (547 edge cuts).
+Communicating partition data and creating halo layers.
+10763 interior elements including halo cells. 
+10763 triangles.
+5796 vertices including ghost points. 
+Establishing MPI communication patterns.
+
+------------------------- Geometry Preprocessing ------------------------
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+Identifying edges and vertices.
+Computing centers of gravity.
+Setting the control volume structure.
+Area of the computational grid: 1.3e+03.
+Searching for the closest normal neighbors to the surfaces.
+Compute the surface curvature.
+Max K: 7.84e+03. Mean K: 35.7. Standard deviation K: 494.
+Checking for periodicity.
+Setting the multigrid structure.
+MG level: 0 -> CVs: 5796. Agglomeration rate 1/1.00. CFL 10.
+MG level: 1 -> CVs: 1800. Agglomeration rate 1/3.22. CFL 8.36.
+MG level: 2 -> CVs: 626. Agglomeration rate 1/2.88. CFL 7.39.
+Computing wall distances.
+Wetted area = 2.03 m.
+Area projection in the x-plane = 0.107 m, y-plane = 1 m.
+
+------------------------- Driver information --------------------------
+A Fluid driver has been instantiated.
+
+------------------------ Iteration Preprocessing ------------------------
+Zone 1: Euler/Navier-Stokes/RANS flow iteration.
+
+------------------------- Solver Preprocessing --------------------------
+Inviscid flow: Computing density based on free-stream
+temperature and pressure using the ideal gas law.
+Force coefficients computed using free-stream values.
+-- Input conditions:
+Fluid Model: STANDARD_AIR 
+Specific gas constant: 287.058 N.m/kg.K.
+Specific gas constant (non-dim): 1
+Specific Heat Ratio: 1.4
+Free-stream static pressure: 101325 Pa.
+Free-stream total pressure: 154454 Pa.
+Free-stream temperature: 288.15 K.
+Free-stream density: 1.22498 kg/m^3.
+Free-stream velocity: (272.173, 5.93883) m/s. Magnitude: 272.238 m/s (529.186 KTS).
+Free-stream total energy per unit mass: 243846 m^2/s^2.
+-- Reference values:
+Reference specific gas constant: 287.058 N.m/kg.K.
+Reference pressure: 101325 Pa.
+Reference temperature: 288.15 K.
+Reference density: 1.22498 kg/m^3.
+Reference velocity: 287.603 m/s.
+Reference energy per unit mass: 82715.8 m^2/s^2.
+-- Resulting non-dimensional state:
+Mach number (non-dim): 0.8
+Specific gas constant (non-dim): 1
+Free-stream temperature (non-dim): 1
+Free-stream pressure (non-dim): 1
+Free-stream density (non-dim): 1
+Free-stream velocity (non-dim): (0.946348, 0.0206494). Magnitude: 0.946573
+Free-stream total energy per unit mass (non-dim): 2.948
+
+Initialize Jacobian structure (Euler). MG level: 0.
+Initialize Jacobian structure (Euler). MG level: 1.
+Initialize Jacobian structure (Euler). MG level: 2.
+
+----------------- Integration and Numerics Preprocessing ----------------
+Integration Preprocessing.
+Numerics Preprocessing.
+
+------------------------------ Begin Solver -----------------------------
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.000799997. Max. DT: 5.71116. CFL: 8.35917.
+MG level: 2 -> Min. DT: 0.00155937. Max. DT: 8.31074. CFL: 7.39444.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -7.32523.
+Maximum residual point 105, located at (0.00752, 0.0115485).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 1253   0.016910    -8.446145     -7.849814       0.066866       0.000450
+ 1254   0.018116    -8.488345     -7.885977       0.066867       0.000451
+ 1255   0.017916    -8.470774     -7.873212       0.066867       0.000451
+ 1256   0.017514    -8.454833     -7.855075       0.066868       0.000451
+ 1257   0.017437    -8.428801     -7.827680       0.066868       0.000451
+ 1258   0.017329    -8.393536     -7.792883       0.066869       0.000451
+ 1259   0.017201    -8.358744     -7.758456       0.066869       0.000451
+ 1260   0.017101    -8.329770     -7.729276       0.066870       0.000451
+ 1261   0.017083    -8.307990     -7.707300       0.066870       0.000452
+ 1262   0.017229    -8.291906     -7.691120       0.066871       0.000452
+ 1263   0.017237    -8.280250     -7.679401       0.066871       0.000452
+ 1264   0.017332    -8.271837     -7.670917       0.066871       0.000452
+ 1265   0.017597    -8.265426     -7.664403       0.066871       0.000452
+ 1266   0.017661    -8.260104     -7.658927       0.066872       0.000452
+ 1267   0.017640    -8.255403     -7.653987       0.066872       0.000452
+ 1268   0.017602    -8.251040     -7.649223       0.066872       0.000452
+ 1269   0.017571    -8.246759     -7.644275       0.066872       0.000452
+ 1270   0.017701    -8.242345     -7.638840       0.066873       0.000452
+ 1271   0.017873    -8.237697     -7.632799       0.066873       0.000452
+ 1272   0.017871    -8.232876     -7.626264       0.066873       0.000452
+ 1273   0.017915    -8.228096     -7.619548       0.066873       0.000452
+ 1274   0.017961    -8.223686     -7.613087       0.066873       0.000452
+ 1275   0.017978    -8.220075     -7.607406       0.066873       0.000452
+ 1276   0.018124    -8.217813     -7.603134       0.066873       0.000452
+ 1277   0.018330    -8.217645     -7.601090       0.066873       0.000452
+ 1278   0.018330    -8.220641     -7.602435       0.066873       0.000452
+ 1279   0.018318    -8.228441     -7.608935       0.066873       0.000452
+ 1280   0.018297    -8.243724     -7.623496       0.066874       0.000452
+ 1281   0.018271    -8.271350     -7.651437       0.066874       0.000452
+ 1282   0.018284    -8.321458     -7.704086       0.066874       0.000452
+ 1283   0.018288    -8.415902     -7.807157       0.066874       0.000452
+ 1284   0.018308    -8.519237     -7.925525       0.066874       0.000452
+ 1285   0.018384    -8.537104     -7.946408       0.066874       0.000452
+ 1286   0.018385    -8.554136     -7.967052       0.066874       0.000452
+ 1287   0.018385    -8.589476     -8.010648       0.066874       0.000452
+ 1288   0.018380    -8.620662     -8.049044       0.066874       0.000452
+ 1289   0.018337    -8.620043     -8.048351       0.066875       0.000452
+ 1290   0.018299    -8.613008     -8.040624       0.066875       0.000452
+ 1291   0.018269    -8.624038     -8.055138       0.066875       0.000452
+ 1292   0.018284    -8.646996     -8.084357       0.066875       0.000452
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.000799997. Max. DT: 5.71116. CFL: 8.35917.
+MG level: 2 -> Min. DT: 0.00155937. Max. DT: 8.31074. CFL: 7.39444.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -7.55078.
+Maximum residual point 2352, located at (0.474479, 0.429889).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 1293   0.018247    -8.651343     -8.090747       0.066875       0.000452
+ 1294   0.018218    -8.643207     -8.082400       0.066876       0.000452
+ 1295   0.018203    -8.649330     -8.091252       0.066876       0.000452
+ 1296   0.018193    -8.673162     -8.121470       0.066876       0.000452
+ 1297   0.018181    -8.678283     -8.128006       0.066876       0.000452
+ 1298   0.018187    -8.671106     -8.119617       0.066876       0.000452
+ 1299   0.018289    -8.688333     -8.140845       0.066876       0.000452
+ 1300   0.018296    -8.724927     -8.186044       0.066876       0.000452
+ 1301   0.018346    -8.729797     -8.190223       0.066876       0.000452
+ 1302   0.018370    -8.743008     -8.204847       0.066876       0.000452
+ 1303   0.018396    -8.789808     -8.263673       0.066876       0.000452
+ 1304   0.018370    -8.821236     -8.299640       0.066877       0.000452
+ 1305   0.018353    -8.836314     -8.312257       0.066877       0.000452
+ 1306   0.018305    -8.839939     -8.312153       0.066877       0.000452
+ 1307   0.018251    -8.821094     -8.285426       0.066877       0.000452
+ 1308   0.018212    -8.811142     -8.273534       0.066877       0.000452
+ 1309   0.018178    -8.819438     -8.284440       0.066877       0.000452
+ 1310   0.018132    -8.788277     -8.243694       0.066877       0.000452
+ 1311   0.018085    -8.786073     -8.241162       0.066877       0.000452
+ 1312   0.018045    -8.800033     -8.259928       0.066877       0.000452
+ 1313   0.017999    -8.802821     -8.262204       0.066877       0.000452
+ 1314   0.017981    -8.824107     -8.288937       0.066877       0.000452
+ 1315   0.017951    -8.830004     -8.293897       0.066877       0.000452
+ 1316   0.017911    -8.823654     -8.282842       0.066877       0.000452
+ 1317   0.017877    -8.817372     -8.273367       0.066877       0.000452
+ 1318   0.017857    -8.815516     -8.270406       0.066877       0.000452
+ 1319   0.017828    -8.816155     -8.270620       0.066877       0.000452
+ 1320   0.017839    -8.817122     -8.270972       0.066877       0.000452
+ 1321   0.017851    -8.817974     -8.271037       0.066877       0.000452
+ 1322   0.017850    -8.819508     -8.271997       0.066877       0.000452
+ 1323   0.017822    -8.822415     -8.274753       0.066877       0.000452
+ 1324   0.017794    -8.826893     -8.279497       0.066877       0.000452
+ 1325   0.017775    -8.832990     -8.286225       0.066877       0.000452
+ 1326   0.017758    -8.840830     -8.295062       0.066877       0.000452
+ 1327   0.017755    -8.850566     -8.306177       0.066877       0.000452
+ 1328   0.017725    -8.862262     -8.319630       0.066877       0.000452
+ 1329   0.017701    -8.875888     -8.335355       0.066877       0.000452
+ 1330   0.017672    -8.891371     -8.353242       0.066877       0.000452
+ 1331   0.017648    -8.908653     -8.373210       0.066877       0.000452
+ 1332   0.017619    -8.927682     -8.395192       0.066877       0.000452
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.000799997. Max. DT: 5.71116. CFL: 8.35917.
+MG level: 2 -> Min. DT: 0.00155937. Max. DT: 8.31074. CFL: 7.39444.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -7.82933.
+Maximum residual point 1582, located at (0.537279, 0.217751).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 1333   0.017596    -8.948333     -8.419015       0.066877       0.000452
+ 1334   0.017576    -8.970298     -8.444274       0.066877       0.000452
+ 1335   0.017552    -8.992930     -8.470150       0.066877       0.000452
+ 1336   0.017542    -9.014879     -8.494903       0.066877       0.000452
+ 1337   0.017520    -9.033115     -8.514160       0.066877       0.000452
+ 1338   0.017508    -9.044530     -8.524117       0.066877       0.000452
+ 1339   0.017487    -9.049224     -8.526240       0.066877       0.000452
+ 1340   0.017459    -9.046568     -8.519778       0.066877       0.000452
+ 1341   0.017465    -9.040114     -8.509557       0.066877       0.000452
+ 1342   0.017528    -9.033859     -8.500685       0.066877       0.000452
+ 1343   0.017597    -9.030438     -8.496107       0.066877       0.000452
+ 1344   0.017648    -9.030627     -8.496345       0.066877       0.000452
+ 1345   0.017683    -9.034190     -8.500772       0.066877       0.000452
+ 1346   0.017658    -9.040704     -8.508671       0.066877       0.000452
+ 1347   0.017647    -9.049972     -8.519731       0.066877       0.000452
+ 1348   0.017633    -9.061781     -8.533647       0.066877       0.000452
+ 1349   0.017697    -9.075870     -8.550045       0.066877       0.000452
+ 1350   0.017807    -9.092122     -8.568751       0.066877       0.000452
+ 1351   0.017914    -9.110599     -8.589838       0.066877       0.000452
+ 1352   0.017991    -9.131309     -8.613295       0.066877       0.000452
+ 1353   0.018046    -9.153907     -8.638637       0.066877       0.000452
+ 1354   0.018093    -9.177502     -8.664685       0.066877       0.000452
+ 1355   0.018125    -9.200930     -8.689966       0.066877       0.000452
+ 1356   0.018209    -9.223357     -8.713572       0.066877       0.000452
+ 1357   0.018259    -9.244417     -8.735246       0.066877       0.000452
+ 1358   0.018321    -9.263982     -8.754959       0.066877       0.000452
+ 1359   0.018375    -9.282536     -8.773471       0.066877       0.000452
+ 1360   0.018419    -9.301117     -8.792271       0.066877       0.000452
+ 1361   0.018474    -9.320072     -8.811668       0.066877       0.000452
+ 1362   0.018541    -9.338998     -8.830864       0.066877       0.000452
+ 1363   0.018591    -9.357726     -8.849635       0.066877       0.000452
+ 1364   0.018612    -9.376128     -8.867904       0.066877       0.000452
+ 1365   0.018645    -9.394167     -8.885715       0.066877       0.000452
+ 1366   0.018659    -9.411948     -8.903267       0.066877       0.000452
+ 1367   0.018644    -9.430015     -8.921399       0.066877       0.000452
+ 1368   0.018626    -9.449636     -8.941876       0.066877       0.000452
+ 1369   0.018610    -9.468662     -8.960989       0.066877       0.000452
+ 1370   0.018585    -9.482892     -8.973039       0.066877       0.000452
+ 1371   0.018576    -9.506330     -8.999904       0.066877       0.000452
+ 1372   0.018587    -9.528054     -9.022873       0.066877       0.000452
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000497809. Max. DT: 3.6287. CFL: 10.
+MG level: 1 -> Min. DT: 0.000799997. Max. DT: 5.71116. CFL: 8.35917.
+MG level: 2 -> Min. DT: 0.00155937. Max. DT: 8.31074. CFL: 7.39444.
+-------------------------------------------------------------------------
+
+----------------------- Residual Evolution Summary ----------------------
+log10[Maximum residual]: -8.32002.
+Maximum residual point 407, located at (0.551932, 0.0591163).
+-------------------------------------------------------------------------
+
+ Iter    Time(s)     Res[Rho]     Res[RhoE]      CL(Total)      CD(Total)
+ 1373   0.018579    -9.548358     -9.042648       0.066877       0.000452
+ 1374   0.018562    -9.569696     -9.064473       0.066877       0.000452
+ 1375   0.018545    -9.590475     -9.085516       0.066877       0.000452
+ 1376   0.018531    -9.612112     -9.107634       0.066877       0.000452
+ 1377   0.018519    -9.632960     -9.128509       0.066877       0.000452
+ 1378   0.018509    -9.653385     -9.148691       0.066877       0.000452
+ 1379   0.018493    -9.674211     -9.169544       0.066877       0.000452
+ 1380   0.018476    -9.694795     -9.189984       0.066877       0.000452
+ 1381   0.018461    -9.714818     -9.209434       0.066877       0.000452
+ 1382   0.018447    -9.735315     -9.229759       0.066877       0.000452
+ 1383   0.018433    -9.757129     -9.251908       0.066877       0.000452
+ 1384   0.018424    -9.780319     -9.275815       0.066877       0.000452
+ 1385   0.018410    -9.803751     -9.299509       0.066877       0.000452
+ 1386   0.018395    -9.827967     -9.324093       0.066877       0.000452
+ 1387   0.018383    -9.853059     -9.349691       0.066877       0.000452
+ 1388   0.018369    -9.878931     -9.376103       0.066877       0.000452
+ 1389   0.018354    -9.905502     -9.403147       0.066877       0.000452
+ 1390   0.018337    -9.932740     -9.430920       0.066877       0.000452
+ 1391   0.018316    -9.960443     -9.459091       0.066877       0.000452
+ 1392   0.018301    -9.988201     -9.487138       0.066877       0.000452
+ 1393   0.018286   -10.016034     -9.515066       0.066877       0.000452
+
+-------------------------- File Output Summary --------------------------
+Writing comma-separated values (CSV) surface files.
+Merging coordinates in the Master node.
+Merging solution in the Master node.
+Writing SU2 native restart file.
+Writing the forces breakdown file.
+-------------------------------------------------------------------------
+
+History file, closed.
+
+------------------------- Solver Postprocessing -------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterpolator container.
+Deleted CTransfer container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+Completed in 2.636028 seconds on 8 cores.
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Solution Exporting Code)                   |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Input mesh file name: mesh_deform.su2
+
+-------------------------- Output Information ---------------------------
+The output file format is Paraview ASCII (.vtk).
+Flow variables file name: flow.
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points before parallel partitioning.
+Performing linear partitioning of the grid nodes.
+10216 interior elements before parallel partitioning.
+Calling the partitioning functions.
+Building the graph adjacency structure.
+Distributing elements across all ranks.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+Calling ParMETIS...
+Finished partitioning using ParMETIS (547 edge cuts).
+Communicating partition data and creating halo layers.
+10763 interior elements including halo cells. 
+10763 triangles.
+5796 vertices including ghost points. 
+Establishing MPI communication patterns.
+Identify vertices.
+
+------------------------- Solution Postprocessing -----------------------
+Reading and storing the solution from restart_flow.dat.
+Merging connectivities in the Master node.
+Merging solution in the Master node.
+Writing Paraview ASCII file (volume grid).
+Writing Paraview ASCII file (surface grid).
+
+Completed in 0.056757 seconds on 8 cores.
+
+------------------------- Exit Success (SU2_SOL) ------------------------
+

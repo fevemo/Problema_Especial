@@ -1,0 +1,695 @@
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Computational Fluid Dynamics Code)         |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Continuous Euler adjoint equations.
+Mach number: 0.8.
+Angle of attack (AoA): 1.25 deg, and angle of sideslip (AoS): 0 deg.
+Read adjoint solution from: solution_adj.dat.
+Read flow solution from: solution_flow.dat.
+Non-Dimensional simulation (P=1.0, Rho=1.0, T=1.0 at the farfield).
+The reference length/area (force coefficient) is 1.
+The reference length (moment computation) is 1.
+Reference origin (moment computation) is (0.25, 0, 0).
+Surface(s) where the force coefficients are evaluated: airfoil.
+Surface(s) plotted in the output file: airfoil.
+Surface(s) affected by the design variables: airfoil.
+Input mesh file name: mesh_deform.su2
+
+----------------------- Design problem definition -----------------------
+CD objective function.
+
+---------------------- Space Numerical Integration ----------------------
+Jameson-Schmidt-Turkel scheme for the adjoint inviscid terms.
+JST viscous coefficients (1st, 2nd, & 4th): 0.15, 0, 0.02.
+The method includes a grid stretching correction (p = 0.3).
+Second order integration.
+The reference sharp edge distance is: 0.15. 
+Gradient computation using Green-Gauss theorem.
+
+---------------------- Time Numerical Integration -----------------------
+Local time stepping (steady state simulation).
+Euler implicit method for the adjoint equations.
+V Multigrid Cycle, with 2 multigrid levels.
+Damping factor for the residual restriction: 1.
+Damping factor for the correction prolongation: 1.
+No CFL adaptation.
+Multigrid Level:                       0     1     2
+Courant-Friedrichs-Lewy number:        8
+MG PreSmooth coefficients:             1     2     3
+MG PostSmooth coefficients:            0     0     0
+MG CorrecSmooth coefficients:          0     0     0
+
+------------------------- Convergence Criteria --------------------------
+Maximum number of iterations: 1000.
+Reduce the adjoint density residual 6 orders of magnitude.
+The minimum value for the adjoint density residual is 10^(-10).
+
+-------------------------- Output Information ---------------------------
+Writing a flow solution every 250 iterations.
+Writing the convergence history every 1 iterations.
+The output file format is Paraview ASCII (.vtk).
+Convergence history file name: history_adjoint.
+Forces breakdown file name: forces_breakdown.dat.
+Adjoint solution file name: solution_adj.dat.
+Restart adjoint file name: restart_adj.dat.
+Adjoint variables file name: adjoint.
+Surface adjoint coefficients file name: surface_adjoint.
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points before parallel partitioning.
+Performing linear partitioning of the grid nodes.
+10216 interior elements before parallel partitioning.
+Calling the partitioning functions.
+Building the graph adjacency structure.
+Distributing elements across all ranks.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+Calling ParMETIS...
+Finished partitioning using ParMETIS (547 edge cuts).
+Communicating partition data and creating halo layers.
+10763 interior elements including halo cells. 
+10763 triangles.
+5796 vertices including ghost points. 
+Establishing MPI communication patterns.
+
+------------------------- Geometry Preprocessing ------------------------
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+Identifying edges and vertices.
+Computing centers of gravity.
+Setting the control volume structure.
+Area of the computational grid: 1.3e+03.
+Searching for the closest normal neighbors to the surfaces.
+Compute the surface curvature.
+Max K: 7.84e+03. Mean K: 35.7. Standard deviation K: 494.
+Checking for periodicity.
+Setting the multigrid structure.
+MG level: 0 -> CVs: 5796. Agglomeration rate 1/1.00. CFL 8.
+MG level: 1 -> CVs: 1800. Agglomeration rate 1/3.22. CFL 6.69.
+MG level: 2 -> CVs: 626. Agglomeration rate 1/2.88. CFL 5.92.
+Computing wall distances.
+Wetted area = 2.03 m.
+Area projection in the x-plane = 0.107 m, y-plane = 1 m.
+
+------------------------- Driver information --------------------------
+A Fluid driver has been instantiated.
+
+------------------------ Iteration Preprocessing ------------------------
+Zone 1: adjoint Euler/Navier-Stokes/RANS flow iteration.
+
+------------------------- Solver Preprocessing --------------------------
+Inviscid flow: Computing density based on free-stream
+temperature and pressure using the ideal gas law.
+Force coefficients computed using free-stream values.
+-- Input conditions:
+Fluid Model: STANDARD_AIR 
+Specific gas constant: 287.058 N.m/kg.K.
+Specific gas constant (non-dim): 1
+Specific Heat Ratio: 1.4
+Free-stream static pressure: 101325 Pa.
+Free-stream total pressure: 154454 Pa.
+Free-stream temperature: 288.15 K.
+Free-stream density: 1.22498 kg/m^3.
+Free-stream velocity: (272.173, 5.93883) m/s. Magnitude: 272.238 m/s (529.186 KTS).
+Free-stream total energy per unit mass: 243846 m^2/s^2.
+-- Reference values:
+Reference specific gas constant: 287.058 N.m/kg.K.
+Reference pressure: 101325 Pa.
+Reference temperature: 288.15 K.
+Reference density: 1.22498 kg/m^3.
+Reference velocity: 287.603 m/s.
+Reference energy per unit mass: 82715.8 m^2/s^2.
+-- Resulting non-dimensional state:
+Mach number (non-dim): 0.8
+Specific gas constant (non-dim): 1
+Free-stream temperature (non-dim): 1
+Free-stream pressure (non-dim): 1
+Free-stream density (non-dim): 1
+Free-stream velocity (non-dim): (0.946348, 0.0206494). Magnitude: 0.946573
+Free-stream total energy per unit mass (non-dim): 2.948
+
+Initialize Jacobian structure (Euler). MG level: 0.
+Initialize Jacobian structure (Adjoint Euler). MG level: 0.
+Initialize Jacobian structure (Euler). MG level: 1.
+Initialize Jacobian structure (Adjoint Euler). MG level: 1.
+Initialize Jacobian structure (Euler). MG level: 2.
+Initialize Jacobian structure (Adjoint Euler). MG level: 2.
+
+----------------- Integration and Numerics Preprocessing ----------------
+Integration Preprocessing.
+Numerics Preprocessing.
+
+------------------------------ Begin Solver -----------------------------
+Begin direct solver to store flow data (single iteration).
+Compute residuals to check the convergence of the direct problem.
+log10[Maximum residual]: -8.88785, located at point 1272.
+End direct solver, begin adjoint problem.
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.000398247. Max. DT: 2.90296. CFL: 8.
+MG level: 1 -> Min. DT: 0.000639997. Max. DT: 4.56893. CFL: 6.68734.
+MG level: 2 -> Min. DT: 0.0012475. Max. DT: 6.64859. CFL: 5.91555.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -8.35189.
+Maximum residual point 116, located at (0.06633, 0.0278169).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  315   0.051887      -9.363956      -9.532518   -2.4557e-01    2.1713e-04
+  316   0.035205      -9.201501      -9.595045   -2.4558e-01    2.1713e-04
+  317   0.031848      -9.057211      -9.566775   -2.4558e-01    2.1712e-04
+  318   0.029094      -9.016040      -9.501300   -2.4558e-01    2.1712e-04
+  319   0.027072      -8.971579      -9.433668   -2.4558e-01    2.1712e-04
+  320   0.025663      -8.961958      -9.400949   -2.4558e-01    2.1712e-04
+  321   0.024677      -8.972149      -9.377543   -2.4558e-01    2.1712e-04
+  322   0.023903      -8.995955      -9.383637   -2.4558e-01    2.1712e-04
+  323   0.023281      -9.022837      -9.408431   -2.4558e-01    2.1712e-04
+  324   0.022906      -9.046159      -9.431382   -2.4558e-01    2.1712e-04
+  325   0.022534      -9.065892      -9.444227   -2.4558e-01    2.1712e-04
+  326   0.022221      -9.074126      -9.438115   -2.4558e-01    2.1712e-04
+  327   0.021980      -9.060121      -9.413967   -2.4558e-01    2.1712e-04
+  328   0.021777      -9.102257      -9.487794   -2.4558e-01    2.1712e-04
+  329   0.021608      -9.152713      -9.554443   -2.4558e-01    2.1712e-04
+  330   0.021899      -9.181614      -9.578718   -2.4558e-01    2.1712e-04
+  331   0.022234      -9.219060      -9.624184   -2.4558e-01    2.1712e-04
+  332   0.022706      -9.255248      -9.676162   -2.4558e-01    2.1713e-04
+  333   0.022965      -9.293847      -9.722145   -2.4558e-01    2.1713e-04
+  334   0.022891      -9.332292      -9.775057   -2.4558e-01    2.1713e-04
+  335   0.023055      -9.360640      -9.815155   -2.4558e-01    2.1713e-04
+  336   0.023543      -9.382640      -9.862072   -2.4558e-01    2.1713e-04
+  337   0.023979      -9.393676      -9.890461   -2.4558e-01    2.1713e-04
+  338   0.024292      -9.401949      -9.911749   -2.4558e-01    2.1713e-04
+  339   0.024383      -9.402401      -9.918089   -2.4558e-01    2.1713e-04
+  340   0.024491      -9.403682      -9.922193   -2.4558e-01    2.1713e-04
+  341   0.024609      -9.405652      -9.925169   -2.4558e-01    2.1713e-04
+  342   0.024647      -9.411425      -9.932777   -2.4558e-01    2.1713e-04
+  343   0.024713      -9.421178      -9.945904   -2.4558e-01    2.1713e-04
+  344   0.024822      -9.433271      -9.961199   -2.4558e-01    2.1713e-04
+  345   0.024949      -9.444340      -9.974010   -2.4558e-01    2.1713e-04
+  346   0.025035      -9.451401      -9.980109   -2.4558e-01    2.1713e-04
+  347   0.025032      -9.451898      -9.975792   -2.4558e-01    2.1713e-04
+  348   0.025056      -9.444546      -9.958978   -2.4558e-01    2.1713e-04
+  349   0.025192      -9.431537      -9.933594   -2.4558e-01    2.1713e-04
+  350   0.025352      -9.423640      -9.918065   -2.4558e-01    2.1713e-04
+  351   0.025318      -9.448127      -9.967758   -2.4558e-01    2.1713e-04
+  352   0.025352      -9.444792      -9.950656   -2.4558e-01    2.1713e-04
+  353   0.025338      -9.456318      -9.974640   -2.4558e-01    2.1713e-04
+  354   0.025306      -9.454314      -9.957392   -2.4558e-01    2.1713e-04
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003982. Max. DT: 2.903. CFL: 8.
+MG level: 1 -> Min. DT: 0.00064. Max. DT: 4.569. CFL: 6.687.
+MG level: 2 -> Min. DT: 0.001247. Max. DT: 6.649. CFL: 5.916.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -8.467.
+Maximum residual point 2371, located at (0.2586, 0.4469).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  355   0.025216      -9.473467      -9.997761   -2.4558e-01    2.1713e-04
+  356   0.025122      -9.468078      -9.965511   -2.4558e-01    2.1713e-04
+  357   0.025081      -9.472539      -9.956071   -2.4558e-01    2.1713e-04
+  358   0.025083      -9.503669     -10.017269   -2.4558e-01    2.1713e-04
+  359   0.025144      -9.519380     -10.038002   -2.4558e-01    2.1713e-04
+  360   0.025031      -9.536416     -10.056110   -2.4558e-01    2.1713e-04
+  361   0.024888      -9.547221     -10.071662   -2.4558e-01    2.1713e-04
+  362   0.024763      -9.556476     -10.081899   -2.4558e-01    2.1713e-04
+  363   0.024631      -9.566976     -10.091757   -2.4558e-01    2.1714e-04
+  364   0.024506      -9.578499     -10.102062   -2.4558e-01    2.1714e-04
+  365   0.024385      -9.590305     -10.113225   -2.4558e-01    2.1714e-04
+  366   0.024272      -9.601523     -10.122666   -2.4558e-01    2.1714e-04
+  367   0.024163      -9.612555     -10.131119   -2.4558e-01    2.1714e-04
+  368   0.024060      -9.623084     -10.137088   -2.4558e-01    2.1714e-04
+  369   0.023955      -9.627819     -10.131795   -2.4558e-01    2.1714e-04
+  370   0.023871      -9.607868     -10.088025   -2.4558e-01    2.1714e-04
+  371   0.023769      -9.646610     -10.152257   -2.4558e-01    2.1715e-04
+  372   0.023666      -9.633794     -10.108059   -2.4558e-01    2.1715e-04
+  373   0.023569      -9.633780     -10.103326   -2.4558e-01    2.1715e-04
+  374   0.023506      -9.675816     -10.166610   -2.4558e-01    2.1715e-04
+  375   0.023425      -9.677756     -10.144006   -2.4558e-01    2.1715e-04
+  376   0.023355      -9.703748     -10.189657   -2.4558e-01    2.1715e-04
+  377   0.023276      -9.707260     -10.170217   -2.4558e-01    2.1715e-04
+  378   0.023200      -9.710356     -10.160740   -2.4558e-01    2.1715e-04
+  379   0.023122      -9.717331     -10.167156   -2.4558e-01    2.1715e-04
+  380   0.023052      -9.719212     -10.161394   -2.4558e-01    2.1716e-04
+  381   0.022984      -9.727590     -10.170681   -2.4558e-01    2.1716e-04
+  382   0.022914      -9.735610     -10.176284   -2.4558e-01    2.1716e-04
+  383   0.022862      -9.743097     -10.182282   -2.4558e-01    2.1716e-04
+  384   0.022815      -9.750468     -10.186041   -2.4558e-01    2.1716e-04
+  385   0.022756      -9.758838     -10.191392   -2.4558e-01    2.1716e-04
+  386   0.022690      -9.767735     -10.196652   -2.4558e-01    2.1716e-04
+  387   0.022628      -9.777282     -10.202658   -2.4558e-01    2.1716e-04
+  388   0.022567      -9.787338     -10.209175   -2.4558e-01    2.1716e-04
+  389   0.022510      -9.797852     -10.216361   -2.4558e-01    2.1716e-04
+  390   0.022455      -9.808931     -10.224412   -2.4558e-01    2.1716e-04
+  391   0.022399      -9.820618     -10.233409   -2.4558e-01    2.1717e-04
+  392   0.022343      -9.833008     -10.243434   -2.4558e-01    2.1717e-04
+  393   0.022294      -9.846163     -10.254551   -2.4558e-01    2.1717e-04
+  394   0.022262      -9.860130     -10.266803   -2.4558e-01    2.1717e-04
+
+---------------------- Local Time Stepping Summary ----------------------
+MG level: 0 -> Min. DT: 0.0003982. Max. DT: 2.903. CFL: 8.
+MG level: 1 -> Min. DT: 0.00064. Max. DT: 4.569. CFL: 6.687.
+MG level: 2 -> Min. DT: 0.001247. Max. DT: 6.649. CFL: 5.916.
+-------------------------------------------------------------------------
+
+log10[Maximum residual]: -8.81.
+Maximum residual point 225, located at (-19.84, -2.507).
+
+ Iter    Time(s)   Res[Psi_Rho]     Res[Psi_E]      Sens_Geo      Sens_AoA
+  395   0.022227      -9.874924     -10.280209   -2.4558e-01    2.1717e-04
+  396   0.022179      -9.890542     -10.294754   -2.4558e-01    2.1717e-04
+  397   0.022134      -9.906962     -10.310397   -2.4558e-01    2.1717e-04
+  398   0.022096      -9.924152     -10.327077   -2.4558e-01    2.1717e-04
+  399   0.022047      -9.942070     -10.344712   -2.4558e-01    2.1717e-04
+  400   0.021996      -9.960669     -10.363206   -2.4558e-01    2.1717e-04
+  401   0.021954      -9.979892     -10.382446   -2.4558e-01    2.1717e-04
+  402   0.021913      -9.999676     -10.402310   -2.4558e-01    2.1717e-04
+  403   0.021885     -10.019957     -10.422671   -2.4558e-01    2.1717e-04
+
+-------------------------- File Output Summary --------------------------
+Writing comma-separated values (CSV) surface files.
+Merging coordinates in the Master node.
+Merging solution in the Master node.
+Writing SU2 native restart file.
+-------------------------------------------------------------------------
+
+History file, closed.
+
+------------------------- Solver Postprocessing -------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterpolator container.
+Deleted CTransfer container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+Completed in 1.9989 seconds on 8 cores.
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Solution Exporting Code)                   |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Input mesh file name: mesh_deform.su2
+
+-------------------------- Output Information ---------------------------
+The output file format is Paraview ASCII (.vtk).
+Flow variables file name: flow.
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points before parallel partitioning.
+Performing linear partitioning of the grid nodes.
+10216 interior elements before parallel partitioning.
+Calling the partitioning functions.
+Building the graph adjacency structure.
+Distributing elements across all ranks.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+Calling ParMETIS...
+Finished partitioning using ParMETIS (547 edge cuts).
+Communicating partition data and creating halo layers.
+10763 interior elements including halo cells. 
+10763 triangles.
+5796 vertices including ghost points. 
+Establishing MPI communication patterns.
+Identify vertices.
+
+------------------------- Solution Postprocessing -----------------------
+Reading and storing the solution from restart_adj_cd.dat.
+Merging connectivities in the Master node.
+Merging solution in the Master node.
+Writing Paraview ASCII file (volume grid).
+Writing Paraview ASCII file (surface grid).
+
+Completed in 0.052175 seconds on 8 cores.
+
+------------------------- Exit Success (SU2_SOL) ------------------------
+
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 5.0.0  "Raven"                            |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Gradient Projection Code)                  |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Original Developers: Dr. Francisco D. Palacios.                   |
+|                          Dr. Thomas D. Economon.                      |
+-------------------------------------------------------------------------
+| SU2 Developers:                                                       |
+| - Prof. Juan J. Alonso's group at Stanford University.                |
+| - Prof. Piero Colonna's group at Delft University of Technology.      |
+| - Prof. Nicolas R. Gauger's group at Kaiserslautern U. of Technology. |
+| - Prof. Alberto Guardone's group at Polytechnic University of Milan.  |
+| - Prof. Rafael Palacios' group at Imperial College London.            |
+| - Prof. Edwin van der Weide's group at the University of Twente.      |
+| - Prof. Vincent Terrapon's group at the University of Liege.          |
+-------------------------------------------------------------------------
+| Copyright (C) 2012-2017 SU2, the open-source CFD code.                |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+
+------------------------ Physical Case Definition -----------------------
+Input mesh file name: mesh_deform.su2
+Input sensitivity file name: surface_adjoint.
+
+-------------------- Surface deformation parameters ---------------------
+Design variables definition (markers <-> value <-> param):
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.05 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.1 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.15 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.2 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.25 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.3 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.35 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.4 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.45 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.5 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.55 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.6 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.65 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.7 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.75 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.8 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.85 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.9 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 0, 0.95 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.05 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.1 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.15 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.2 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.25 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.3 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.35 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.4 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.45 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.5 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.55 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.6 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.65 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.7 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.75 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.8 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.85 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.9 )
+Hicks Henne <-> airfoil <-> 0.001 <-> ( 1, 0.95 )
+
+----------------------- Design problem definition -----------------------
+CD objective function.
+
+-------------------------- Output Information ---------------------------
+Output gradient file name: of_grad.dat. 
+
+------------------- Config File Boundary Information --------------------
+Euler wall boundary marker(s): airfoil.
+Far-field boundary marker(s): farfield.
+
+---------------------- Read Grid File Information -----------------------
+Two dimensional problem.
+5233 points before parallel partitioning.
+Performing linear partitioning of the grid nodes.
+10216 interior elements before parallel partitioning.
+Calling the partitioning functions.
+Building the graph adjacency structure.
+Distributing elements across all ranks.
+2 surface markers.
+200 boundary elements in index 0 (Marker = airfoil).
+50 boundary elements in index 1 (Marker = farfield).
+Calling ParMETIS...
+Finished partitioning using ParMETIS (547 edge cuts).
+Communicating partition data and creating halo layers.
+10763 interior elements including halo cells. 
+10763 triangles.
+5796 vertices including ghost points. 
+Establishing MPI communication patterns.
+
+----------------------- Preprocessing computations ----------------------
+Setting local point connectivity.
+Checking the numerical grid orientation.
+Identify edges and vertices.
+Computing centers of gravity.
+Setting the bound control volume structure.
+Reading surface sensitivities at each node from file.
+
+---------- Start gradient evaluation using sensitivity information ----------
+Evaluate functional gradient using Finite Differences.
+
+Design variable (HICKS_HENNE) number 0.
+DRAG gradient : -0.0435701
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 1.
+DRAG gradient : -0.0212794
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 2.
+DRAG gradient : -0.00831819
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 3.
+DRAG gradient : -0.000982679
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 4.
+DRAG gradient : 0.00268025
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 5.
+DRAG gradient : 0.00372004
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 6.
+DRAG gradient : 0.00280796
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 7.
+DRAG gradient : 0.000572406
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 8.
+DRAG gradient : -0.00223413
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 9.
+DRAG gradient : -0.0047681
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 10.
+DRAG gradient : -0.00633007
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 11.
+DRAG gradient : -0.0066908
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 12.
+DRAG gradient : -0.00625503
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 13.
+DRAG gradient : -0.0058066
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 14.
+DRAG gradient : -0.00590983
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 15.
+DRAG gradient : -0.00655954
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 16.
+DRAG gradient : -0.00757415
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 17.
+DRAG gradient : -0.00862798
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 18.
+DRAG gradient : -0.00569784
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 19.
+DRAG gradient : -0.0587514
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 20.
+DRAG gradient : -0.0228901
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 21.
+DRAG gradient : -0.00525425
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 22.
+DRAG gradient : 0.00460063
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 23.
+DRAG gradient : 0.0104392
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 24.
+DRAG gradient : 0.0136436
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 25.
+DRAG gradient : 0.0147042
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 26.
+DRAG gradient : 0.0139022
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 27.
+DRAG gradient : 0.0116545
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 28.
+DRAG gradient : 0.00864553
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 29.
+DRAG gradient : 0.00576865
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 30.
+DRAG gradient : 0.003883
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 31.
+DRAG gradient : 0.00345464
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 32.
+DRAG gradient : 0.00428541
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 33.
+DRAG gradient : 0.00563851
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 34.
+DRAG gradient : 0.00687273
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 35.
+DRAG gradient : 0.00802141
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 36.
+DRAG gradient : 0.00915809
+-------------------------------------------------------------------------
+
+Design variable (HICKS_HENNE) number 37.
+DRAG gradient : 0.00762473
+-------------------------------------------------------------------------
+
+Completed in 0.011088 seconds on 8 cores.
+
+------------------------- Exit Success (SU2_DOT) ------------------------
+

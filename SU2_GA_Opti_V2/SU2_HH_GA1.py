@@ -15,7 +15,7 @@ L=38                                                         #
 #Number of specimens in each generation                      #
 N=20                                                         #
 #Number generations to evolve                                #
-K=40                                                         #
+K=20                                                         #
 #Probability parameters                                      #
 p_c=0.5                                                      #
 p_m=0.1                                                      #
